@@ -1,13 +1,16 @@
-import { PostInterface, RecommendCardInterface } from "../../../server/credential/Interface";
-import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates";
-import { RecommendPersonTemplates } from "../../templates/feedTemplates/RecommendPersonTemplates";
+import { RecommendCardInterface } from "../../../server/credential/Interface";
+import { dummyUser } from "../../../server/dummy/Data";
+import { PostSecondMapCard } from "./PostSecondMapCard";
+import './PostFirstMapCard.scss'
 
-export const PostFirstMapCard =(prop:RecommendCardInterface)=>{
-    if (prop.posts === undefined) return null
-    console.log(prop.posts)
-    return  prop.posts?.map((post:PostInterface, j) => (
-                <BoxInnerTemplates key={j}>
-                    <RecommendPersonTemplates {...prop}/>
-                </BoxInnerTemplates>
-            ))
+export const PostFirstMapCard =()=>{
+    return  <div className="post-first-map-card-container">
+                {
+                    dummyUser.map((item:RecommendCardInterface,i)=>(
+                        <div key={i}>
+                            <PostSecondMapCard {...item} />
+                        </div>
+                    ))
+                }
+            </div>  
 }

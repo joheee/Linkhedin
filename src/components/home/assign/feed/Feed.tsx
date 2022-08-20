@@ -10,19 +10,21 @@ import './Feed.scss'
 export const Feed =()=>{
     return  <BoxTemplates>
                 <div className="feed-outer-container">
-                    <BoxInnerTemplates>
-                        <div className="feed-container responsive">
-                            <FeedHeaderTemplates text='add to your feed' className='fa-solid fa-circle-info'/>
-                            <RecommendTemplates/>
-                            <ViewAllTemplates text='view all recomendations ->'/>
-                        </div>
-                    </BoxInnerTemplates>
+                    <div className="responsive">
+                        <BoxInnerTemplates>
+                            <div className="feed-container">
+                                <FeedHeaderTemplates text='add to your feed' className='fa-solid fa-circle-info'/>
+                                <RecommendTemplates/>
+                                <ViewAllTemplates text='view all recomendations ->'/>
+                            </div>
+                        </BoxInnerTemplates>
+                    </div>
 
-                    <BoxInnerTemplates>
-                        <div className="responsive">
-                            <FooterHome/>
-                        </div>
-                    </BoxInnerTemplates>
+                    <div className="responsive">
+                        <BoxInnerTemplates>
+                                <FooterHome/>
+                        </BoxInnerTemplates>
+                    </div>
                     
                     <div className="responsive">
                         <FooterAttributeTemplates fontSize='.8rem' gap='1rem' maxWidth='20rem'/>

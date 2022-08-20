@@ -18,9 +18,8 @@ export const Additional =()=>{
                 </div>
 
                 <div className="navbar-mobile">
-                    <div onClick={()=>setIsMobile(!isMobile)} className="fa-solid fa-bars">
+                    <div onClick={()=>setIsMobile(!isMobile)} className="fa-solid fa-bars"></div>
                         {isMobile === true ? <MobileAdditional/> : null}
-                    </div>
                 </div>
             </div>
 }
