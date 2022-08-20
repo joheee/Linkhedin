@@ -15,7 +15,7 @@ export const PostCardItemTemplates =(post:PostInterface)=>{
                 }
                 {post.video === undefined ? null :
                     <div className="post-card-item-video-container">
-                        <video src={post.video}></video>
+                        <video src={post.video} autoPlay controls/>
                     </div>
                 }
                 <PostLikeCommentShareTemplates {...post}/>
