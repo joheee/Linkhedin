@@ -1,0 +1,12 @@
+@import '../../../server/base/base.scss';
+#view-all-templates-component{
+    font-size: .8rem;
+    display: flex;
+    align-items: center;
+    padding: .5rem 1rem;
+    max-width: fit-content;
+    &:hover {
+        background-color: var(--boxColor);
+        cursor: pointer;
+    }
+}

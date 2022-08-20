@@ -1,0 +1,21 @@
+.footer-attribute-wrapper-container {
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap-reverse;
+
+    img {
+        height: 15px;
+    }
+    p:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    .footer-header-component{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: .2rem;
+    }
+}

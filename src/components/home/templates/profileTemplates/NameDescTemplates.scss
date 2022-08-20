@@ -1,0 +1,16 @@
+.profile-username-description-container{
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    
+    .profile-username-container {
+        font-weight: bold;
+        font-size: 1rem;
+    }
+    .profile-description-container {
+        font-size: .7rem;
+        font-weight: 100;
+        text-align: center;
+        max-width: 10rem;
+    }
+}

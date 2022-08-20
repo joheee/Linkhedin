@@ -1,0 +1,31 @@
+@import "../server/base/base.scss";
+
+#input-text-component {
+    border:2px solid var(--fontColor);
+    font-family: inherit;
+    font-size: 1rem;
+    color:var(--fontColor);
+    outline: none;
+    background: none;
+    padding: .4rem 2rem .4rem .6rem;
+    transition: all .4s;
+    width: 280px;
+    height: 32px;
+
+    &:hover{
+        border-color: rgba($color:#000, $alpha:0.3);
+        &::placeholder {
+            color: rgba($color:#000, $alpha:0.3);
+        }
+    }
+    &::placeholder{
+        color:black;
+    }
+    &:focus{
+        border-color: var(--accentColor);
+        color:var(--fontColor);
+        &::placeholder{
+            color:white;
+        }
+    }
+}

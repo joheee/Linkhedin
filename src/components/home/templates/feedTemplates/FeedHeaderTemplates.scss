@@ -1,0 +1,11 @@
+#feed-header-templates-component {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1rem;
+    font-weight: bold;
+
+    .fa-solid:hover{
+        cursor: pointer;
+    }
+}

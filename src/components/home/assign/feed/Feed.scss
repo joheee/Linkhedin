@@ -1,0 +1,15 @@
+.feed-outer-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .feed-container {
+        min-width: 18rem;
+        padding: .8rem;
+    }
+}
+
+@media screen and (max-width: 1200px){
+    .responsive{
+        display: none;
+    }
+}

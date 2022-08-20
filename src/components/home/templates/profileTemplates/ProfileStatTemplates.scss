@@ -1,0 +1,17 @@
+@import '../../../server/base/base.scss';
+
+.profile-connection-container {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    padding: .5rem 3rem;
+    
+    &:hover {
+        background-color: var(--boxColor);
+        cursor: pointer;
+    }
+
+    .profile-connection-number {
+        color: var(--accentColor);
+    }
+}

@@ -1,0 +1,19 @@
+@import '../../../server/base/base.scss';
+
+.post-attribute-container {
+    display: flex;
+    align-items: center;
+    gap: .7rem;
+    padding: .6rem .4rem;
+    font-size: 1rem;
+
+    &:hover{
+        background-color: var(--boxColor);
+        cursor: pointer;
+    }
+
+    .post-attribute-text {
+        font-weight: 100;
+    }
+
+}

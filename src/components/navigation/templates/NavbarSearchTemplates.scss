@@ -1,0 +1,11 @@
+@import '../../server/base/base.scss';
+
+#navbar-search-component {
+    display: inline-flex;
+    border: none;
+    background-color: var(--searchColor);
+    color: (--fontColor);
+    height: 2.2rem;
+    padding: 0 .5rem;
+    border-radius: .4rem;
+}

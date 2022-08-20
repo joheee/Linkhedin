@@ -1,0 +1,22 @@
+.profile-box-profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .8rem;
+
+    .profile-info-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 2rem;
+        gap: .3rem;
+        width: 100%;
+
+        .profile-stats-container {
+            width: inherit;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    }
+}

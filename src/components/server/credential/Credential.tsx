@@ -1,0 +1,1 @@
+export const googleClientID = '206072850654-85jnhrfqrgtdrgusu9fcaf4qu26c3nqg.apps.googleusercontent.com'

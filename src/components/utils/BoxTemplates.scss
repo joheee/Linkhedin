@@ -1,0 +1,12 @@
+@import '../server/base/base.scss';
+#box-template-container {
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+@media screen and (max-width:850px){
+    #box-template-container{
+        width: 100vw;
+        border-radius: 0;
+    }
+}

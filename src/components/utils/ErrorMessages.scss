@@ -1,0 +1,11 @@
+@import "../server/base/base.scss";
+
+#error-messages-component{
+    color: var(--errorColor);
+    background: transparent;
+    border: 1px solid white;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: .1rem .5rem;
+    text-align: center;
+}

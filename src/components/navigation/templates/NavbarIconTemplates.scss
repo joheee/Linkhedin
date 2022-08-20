@@ -1,0 +1,34 @@
+@import '../../server/base/base.scss';
+
+.navbar-icon-container {
+    padding: 0 .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        border-bottom: 1px solid var(--fontColor);
+        cursor: pointer;
+    }
+    .navbar-icon-text-component{
+        font-size: .7rem;
+    }
+    #navbar-icon-item{
+        position: relative;
+
+        .navbar-icon-dot {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: red;
+            border-radius: 50%;
+            padding: .28rem;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .navbar-icon-text-component {
+        display: none;
+    }
+}

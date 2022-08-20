@@ -1,0 +1,21 @@
+@import "../../server/base/base.scss";
+
+#auth-template-container{
+    padding: 1.4rem;
+    color: var(--fontColor);
+    width: 352px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .15);
+    border-radius: .5rem;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+    gap: 1.4rem;
+
+}
+@media screen and (max-width:750px){
+    #auth-template-container {
+        width: 100%;
+        height: 100%;
+        box-shadow: unset;
+    }
+}

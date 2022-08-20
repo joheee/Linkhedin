@@ -1,0 +1,28 @@
+@import '../../../server/base/base.scss';
+
+.picture-post-container {
+    display: grid;
+    grid-template-columns: 10% 60%;
+    justify-content: center;
+    min-width: 34rem;
+    width: 100%;
+    font-size: 1rem;
+
+    .picture-post-button {
+        color: var(--postBorderColor);
+        border: 1px solid var(--postBorderColor);
+        padding: .875rem 0 .875rem .875rem;
+        border-radius: 2.188rem;
+        &:hover {
+            cursor: pointer;
+            background-color: var(--boxColor);
+        }
+    }
+}
+@media screen and (max-width:500px){
+    .picture-post-container {
+        margin-left: .5rem;
+        grid-template-columns: 12% 60%;
+        justify-content: flex-start;
+    }
+}

@@ -1,0 +1,12 @@
+@import '../../server/base/base.scss';
+
+#navbar-home-templates-component {
+    background-color: var(--primaryColor);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: .3rem 0;
+    img {
+        height: 2.8rem;
+    }
+}

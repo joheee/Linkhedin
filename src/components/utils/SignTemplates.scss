@@ -1,0 +1,23 @@
+@import "../server/base/base.scss";
+
+#sign-templates-component{
+    color: var(--accentColor);
+    font-size: 1rem;
+    display: flex;
+    justify-content: flex-end;
+    width:100%;
+
+    .sign-templates-text{
+        transition: all .4s;
+        &:hover{
+            color: rgba(#0a66c2, 0.5);
+            cursor: pointer;
+        }
+    }
+}
+
+@media screen and (max-width:750px){
+    #sign-templates-component {
+        justify-content: center;        
+    }
+}

@@ -1,0 +1,16 @@
+#footer-component {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin: 1rem 0;
+    font-size: .8rem;
+    font-weight: 100;
+    flex-wrap: wrap;
+ 
+}
+
+@media screen and (max-width: 750px){
+    #footer-component {
+        display: none;
+    }
+}

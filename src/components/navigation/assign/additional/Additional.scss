@@ -1,0 +1,29 @@
+@import '../../../server/base/base.scss';
+
+.navbar-mobile{
+    display: none;
+    position: relative;
+
+    .navbar-mobile-additional-component{
+        position: absolute;
+        top: 2rem;
+        right: 0;
+        #navbar-home-component-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            background-color: var(--primaryColor);
+            padding: 2rem 1rem;
+            border-radius: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width:750px){
+    .navbar-additional{
+        display: none;
+    }
+    .navbar-mobile{
+        display: inline;
+    }
+} 
