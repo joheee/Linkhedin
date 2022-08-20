@@ -1,0 +1,11 @@
+.post-card-item-button-container {
+    display: flex;
+    justify-content: space-evenly;
+    .post-card-item-button-each {
+        display: flex;
+        gap: 1rem;
+        padding: 1rem 1rem;
+        border-radius: .5rem;
+        margin: 0 0 .5rem 0;
+    }
+}

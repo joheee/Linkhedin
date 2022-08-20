@@ -1,0 +1,15 @@
+@import '../../../../server/base/base.scss';
+.post-card-item-template-container {
+    font-size: .9rem;
+    .post-card-description-container{
+        padding: .5rem;
+    }
+    .post-card-item-image-container, .post-card-item-video-container{
+        max-height: 35rem;
+        img, video {
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+}

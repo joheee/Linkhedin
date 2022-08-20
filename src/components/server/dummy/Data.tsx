@@ -29,5 +29,13 @@ export const dummyUser = [
         username:'ughtea',
         profile:'./default-profile.png',
         description:'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        posts: [
+            {
+                description:'Ingin mempercepat inovasi perusahaan Anda? Daftar sekarang ke AWS Cloud Day Indonesia 2022',
+                comment: 123,
+                share: 99,
+                like: 23
+            },
+        ]   
     },
 ]

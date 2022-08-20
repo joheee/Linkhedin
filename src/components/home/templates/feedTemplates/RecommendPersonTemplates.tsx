@@ -3,7 +3,6 @@ import { RecommendCardInterface } from "../../../server/credential/Interface"
 import './RecommendPersonTemplates.scss'
 
 export const RecommendPersonTemplates =(prop:RecommendCardInterface) =>{
-    console.log(prop)
     return  <div className={`recommend-card-inner-container`}>
                 <ProfilePictureTemplates src={prop.profile} width='3rem' height='3rem'/>
                 <div className="recommend-card-username-description-container">
