@@ -5,6 +5,7 @@
     align-items: center;
     padding: .5rem 1rem;
     max-width: fit-content;
+    user-select: none;
     &:hover {
         background-color: var(--boxColor);
         cursor: pointer;

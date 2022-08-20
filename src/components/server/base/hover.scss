@@ -2,5 +2,6 @@
     &:hover{
         background-color: var(--boxColor);
         cursor: pointer;
+        user-select: none;
     }
 }

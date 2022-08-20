@@ -13,6 +13,7 @@
         border: 1px solid var(--postBorderColor);
         padding: .875rem 0 .875rem .875rem;
         border-radius: 2.188rem;
+        user-select: none;
         &:hover {
             cursor: pointer;
             background-color: var(--boxColor);
