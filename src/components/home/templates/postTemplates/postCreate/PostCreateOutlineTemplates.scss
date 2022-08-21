@@ -1,0 +1,28 @@
+.post-create-outline-templates-container {
+    background-color: var(--postBorderColor);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .post-create-inner-box-container {
+        padding: .5rem 1rem 1rem 1rem;
+        background-color: var(--primaryColor);
+        border-radius: .5rem;
+        .post-create-inner-box-header-container{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--boxColor);
+            padding: 0 0 .5rem 0;
+            .fa-solid {
+                padding: .5rem;
+                border-radius: 50%;
+            }
+        }
+    }
+}

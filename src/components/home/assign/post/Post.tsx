@@ -1,5 +1,3 @@
-import { RecommendCardInterface } from "../../../server/credential/Interface"
-import { dummyUser } from "../../../server/dummy/Data"
 import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates"
 import { BoxTemplates } from "../../../utils/BoxTemplates"
 import { LoadingAnimation } from "../../../utils/LoadingAnimation"
@@ -19,6 +17,7 @@ export const Post =()=>{
 
                     <LoadingAnimation height="50" width="100"/>
                     <PostFirstMapCard/>
+                    <LoadingAnimation height="50" width="100"/>
                     
                 </div>
                 

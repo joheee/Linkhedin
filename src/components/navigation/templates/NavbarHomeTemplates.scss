@@ -6,6 +6,9 @@
     justify-content: space-around;
     align-items: center;
     padding: .3rem 0;
+    position: sticky;
+    top: 0;
+    z-index: 1;
     img {
         height: 2.8rem;
     }
