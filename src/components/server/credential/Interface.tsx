@@ -55,3 +55,7 @@ export interface LoadingAnimationInterface {
     height: string
     width: string
 }
+
+export interface RichTextInterface {
+	content: string;
+}

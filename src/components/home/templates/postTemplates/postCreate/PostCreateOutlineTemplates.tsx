@@ -2,6 +2,8 @@
 import { dummyUser } from '../../../../server/dummy/Data'
 import { RecommendPersonTemplates } from '../../feedTemplates/RecommendPersonTemplates'
 import './PostCreateOutlineTemplates.scss'
+import { PostPictureVideoTemplates } from './PostPictureVideoTemplates'
+import { RichTextTemplates } from './RichTextTemplates'
 export const PostCreateOutlineTemplates =({setIsPost}:{setIsPost:(active:boolean)=>void})=>{
     return  <div className="post-create-outline-templates-container">
                 <div className="post-create-inner-box-container">
@@ -10,6 +12,8 @@ export const PostCreateOutlineTemplates =({setIsPost}:{setIsPost:(active:boolean
                         <div onClick={()=>setIsPost(false)} className="fa-solid feed-hover">x</div>
                     </div>
                     <RecommendPersonTemplates {...dummyUser[0]}/>
+                    <RichTextTemplates/>
+                    <PostPictureVideoTemplates/>
                 </div>
             </div>
 }

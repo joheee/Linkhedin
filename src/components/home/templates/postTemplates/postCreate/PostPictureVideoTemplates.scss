@@ -1,0 +1,33 @@
+.post-picture-video-templates-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: rgba(0,0,0,.6);
+
+    .post-picture-video-container {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        
+        .fa-solid, .fa-brands {
+            padding: .5rem;
+            border-radius: 50%;
+            &:hover {
+                background-color: var(--boxColor);
+                cursor: pointer;
+                user-select: none;
+            }
+        }
+    }
+    .post-button {
+        padding: .5rem 1rem;
+        border-radius: 1rem;
+        background-color: var(--boxColor);
+        &:hover {
+            background-color: var(--accentColor);
+            color: var(--primaryColor);
+            cursor: pointer;
+            user-select: none;
+        }
+    }
+}
