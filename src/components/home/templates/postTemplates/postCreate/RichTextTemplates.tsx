@@ -14,6 +14,8 @@ export const RichTextTemplates =()=>{
 
 return  <div className="rich-text-templates-container">
                 <textarea value={text} onChange={(e) => setText(e.target.value)} id='autoresizing' placeholder='what do you want to talk about?'></textarea>
-			    <RichTextRenderTemplates content={text} />
+				<div className="rich-text-render-container">
+			    	<RichTextRenderTemplates content={text} />
+				</div>
             </div>
 }

@@ -3,14 +3,15 @@
     align-items: center;
     gap: 1rem;
     padding: .5rem;
-}
-.recommend-card-username-description-container {
-    width: 80%;
-    .recommend-card-username-text {
-        font-weight: bold;
-    }
-    .recommend-card-description-text {
-        font-size: .8rem;
-        font-weight: lighter;
+    user-select: none;
+    .recommend-card-username-description-container {
+        width: 80%;
+        .recommend-card-username-text {
+            font-weight: bold;
+        }
+        .recommend-card-description-text {
+            font-size: .8rem;
+            font-weight: lighter;
+        }
     }
 }

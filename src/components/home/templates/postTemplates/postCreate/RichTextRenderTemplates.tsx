@@ -10,7 +10,7 @@ export const RichTextRenderTemplates =({ content }: RichTextInterface)=> {
 	return	<p className="rich-text-render-templates-component">
                 {words.map((word,i) => {
                     if(word.match(URL_REGEX)) {
-
+                        
                         return <a href={`//${word}`} target="_blank" key={i}>{word} </a>
                     } else if(word.match(MENTION_REGEX)) {
                         

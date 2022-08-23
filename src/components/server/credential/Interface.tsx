@@ -59,3 +59,7 @@ export interface LoadingAnimationInterface {
 export interface RichTextInterface {
 	content: string;
 }
+
+export interface SearchPopUpInterface {
+    prop: Array<RecommendCardInterface>
+}

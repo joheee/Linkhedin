@@ -1,12 +1,13 @@
-import { RecommendCardInterface } from "../../../server/credential/Interface";
-import { dummyUser } from "../../../server/dummy/Data";
+import { RecommendCardInterface, SearchPopUpInterface } from "../../../server/credential/Interface";
 import { PostSecondMapCard } from "./PostSecondMapCard";
 import './PostFirstMapCard.scss'
 
-export const PostFirstMapCard =()=>{
+
+
+export const PostFirstMapCard =({prop}:SearchPopUpInterface)=>{
     return  <div className="post-first-map-card-container">
                 {
-                    dummyUser.map((item:RecommendCardInterface,i)=>(
+                    prop.map((item:RecommendCardInterface,i)=>(
                         <div key={i}>
                             <PostSecondMapCard {...item} />
                         </div>
