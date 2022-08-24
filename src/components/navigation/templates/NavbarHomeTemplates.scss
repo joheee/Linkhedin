@@ -9,6 +9,7 @@
     position: sticky;
     top: 0;
     z-index: 1;
+    box-shadow: var(--boxShadowColor);
     img {
         height: 2.8rem;
     }

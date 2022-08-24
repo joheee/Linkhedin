@@ -3,7 +3,7 @@ import { SearchPopUpOutlineTemplates } from '../../search/templates/popUp/Search
 import { dummyUser } from '../../server/dummy/Data'
 import { SearchPopUpInterface } from '../../server/credential/Interface'
 import './NavbarSearchTemplates.scss'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 interface SearchUserArrayInterface {
     dummyUser: SearchPopUpInterface
@@ -15,7 +15,10 @@ interface SearchUserArrayInputInterface {
 export const NavbarSearchTemplates =({...attr}:any)=>{
     const [isPopUp, setIsPopUp] = useState(false)
     const [searchInput, setSearchInput] = useState('')
+    let Placeholder ='search'
     const navigate = useNavigate()
+    const {keyword} = useParams()
+    if(keyword !== undefined) Placeholder = keyword
 
     const handleSearchInput = (e:any) => {
         let lowerCase = e.target.value.toLowerCase()
@@ -30,7 +33,6 @@ export const NavbarSearchTemplates =({...attr}:any)=>{
         } 
 
     }
-
     const filterData = dummyUser.filter(el => {
         if(searchInput !== ''){
             return el.username.toLowerCase().includes(searchInput)
@@ -45,7 +47,7 @@ export const NavbarSearchTemplates =({...attr}:any)=>{
       },[searchInput])
 
     return  <div className="navbar-search-templates-container">
-                <input {...attr} type="text"  id='navbar-search-component' placeholder='search' onKeyDown={handleEnter} onChange={handleSearchInput} onClick={()=>setIsPopUp(!isPopUp)}/>
+                <input {...attr} type="text"  id='navbar-search-component' placeholder={Placeholder} onKeyDown={handleEnter} onChange={handleSearchInput} onClick={()=>setIsPopUp(!isPopUp)}/>
                 {isPopUp === true ? <SearchPopUpOutlineTemplates prop={filterData}/> : null}
             </div>  
 }

@@ -1,0 +1,37 @@
+.recommend-user-card-container {
+    border-radius: .8rem;
+    overflow: hidden;
+    box-shadow: var(--boxShadowColor);
+    height: 16.1rem;
+    position: relative;
+    .name-desc-user-card-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        padding: 2rem;
+    }
+    .recommend-user-connect-button-container {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        margin-bottom: .5rem;
+        width: 100%;
+        text-align: center;
+        user-select: none;
+
+        .recommend-user-connect-button{
+            margin:  0 .5rem 0 .5rem;
+            border-radius: 1.6rem;
+            color: var(--accentColor);
+            border: 1px solid var(--accentColor);
+            padding: .3rem 0;
+            &:hover{
+                box-shadow: inset 0 0 0 1px var(--accentColor);
+                background-color: var(--accentButtonColor);
+                cursor: pointer;
+            }
+        }
+    }
+}

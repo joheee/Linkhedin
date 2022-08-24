@@ -1,0 +1,17 @@
+.invitation-user-card-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+    .invitation-user-card-ignore-accept-container{
+        display: flex;
+        gap: 1rem;
+        padding: 0 .5rem 0 0;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .invitation-user-card-ignore-accept-container{
+        flex-direction: column;
+    }
+}

@@ -3,6 +3,7 @@ export const dummyUser = [
         username:'adam',
         profile:'/default-profile.png',
         description:'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        banner: '/default-background.webp',
         posts: [
             {
                 description:'Aws When support is coupled with action, true allyship is possible—at every level, on and off the golf course. It’s why we are proud to support women in golf and business. #AIGWO #AIGAllies',
@@ -16,6 +17,7 @@ export const dummyUser = [
         username:'dennis adam',
         profile:'/default-profile.png',
         description:'Lorem your father',
+        banner: '/default-background.webp',
         posts: [
             {
                 description:'Belinda Tanoto talked about her youth, her five family principles, and the donations her family made. She added that the Foundation seeks to invest in areas where it can make a difference, such as education, leadership, and health. More info: https://lnkd.in/gX5YTWPJ National Healthcare Group Salma Khalik The Straits Times #TanotoFoundation #Education #HealthCare #Leadership #Diabetes #DiabetesAwareness #DiabetesCare #HealthierSG',
@@ -29,6 +31,7 @@ export const dummyUser = [
         username:'ughtea dennis',
         profile:'/default-profile.png',
         description:'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
+        banner: '/default-background.webp',
         posts: [
             {
                 description:'Ingin mempercepat inovasi perusahaan Anda? Daftar sekarang ke AWS Cloud Day Indonesia 2022, @adam @johe @ashiap',
@@ -37,5 +40,31 @@ export const dummyUser = [
                 like: 23
             },
         ]   
-    },
+    },{
+        username:'jojosh programmer',
+        profile:'/default-profile.png',
+        description:'jojosh heree ma priend',
+        banner: '/default-background.webp',
+        posts: [
+            {
+                description:'buset buset buseeet',
+                comment: 121233,
+                share: 9139,
+                like: 21233
+            },
+        ]   
+    },{
+        username:'johevin',
+        profile:'/default-profile.png',
+        description:'jojosh heree ma priend',
+        banner: '/default-background.webp',
+        posts: [
+            {
+                description:'buset buset buseeet',
+                comment: 121233,
+                share: 9139,
+                like: 21233
+            },
+        ]   
+    }
 ]

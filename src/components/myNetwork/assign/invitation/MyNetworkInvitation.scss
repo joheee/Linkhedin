@@ -1,0 +1,20 @@
+.my-network-invitation-container{
+    .my-network-invitation-header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 1rem 0 1rem;
+        .my-network-invitation-header-text{
+            font-weight: bold;
+        }
+        .my-network-invitation-see-all-button{
+            padding: .3rem 1rem;
+            border-radius: .3rem;
+        }
+    }
+    .my-network-invitation-card-container{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

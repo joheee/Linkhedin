@@ -1,0 +1,11 @@
+
+@media screen and (min-width: 1200px) {
+    .user-you-might-know-component-container {
+        grid-template-columns: repeat(4,minmax(0,9.6rem));
+    }
+}
+.user-you-might-know-component-container {
+    padding: 1rem;
+    display: grid;
+    gap: 1rem;
+}

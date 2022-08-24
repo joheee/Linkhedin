@@ -1,0 +1,16 @@
+.manage-my-network-button-component{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .5rem;
+    font-size: 1rem;
+    .manage-my-network-button-header-component {
+        .fa-solid {
+            width: 1.6rem;
+        }
+        display: flex;
+        gap: 1rem;
+        justify-content: space-evenly;
+        align-items: center;
+    }
+}

@@ -39,7 +39,13 @@ export interface RecommendCardInterface {
     username: string
     profile: string
     description: string
+    banner?:string
     posts?: Array<PostInterface>
+}
+
+export interface PropRecommendCardInterface {
+    prop: RecommendCardInterface
+    attr?: React.HTMLAttributes<HTMLDivElement>
 }
 
 export interface PostInterface {
@@ -62,4 +68,11 @@ export interface RichTextInterface {
 
 export interface SearchPopUpInterface {
     prop: Array<RecommendCardInterface>
+}
+
+export interface MyNetworkButtonInterface {
+    dummyData: number | null
+    icon: string
+    text: string
+    navigate: string
 }

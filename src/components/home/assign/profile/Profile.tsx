@@ -1,3 +1,4 @@
+import { dummyUser } from "../../../server/dummy/Data"
 import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates"
 import { BoxTemplates } from "../../../utils/BoxTemplates"
 import { NameDescTemplates } from "../../templates/profileTemplates/NameDescTemplates"
@@ -9,9 +10,9 @@ export const Profile =()=>{
     return  <BoxTemplates>
                 <BoxInnerTemplates>
                     <div className='profile-box-profile-container'>
-                        <ProfileBackgroundTemplates/>
+                        <ProfileBackgroundTemplates {...dummyUser[0]}/>
                         <div className="profile-info-container">
-                            <NameDescTemplates/>
+                            <NameDescTemplates {...dummyUser[0]}/>
                             <div className="profile-stats-container">
                                 <ProfileStatTemplates label='connections' number={23}/>
                                 <ProfileStatTemplates label='invitations' number={6}/>
