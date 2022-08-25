@@ -9,6 +9,7 @@ export const handleLight =()=>{
     document.documentElement.style.setProperty('--boxColor','rgba(0,0,0,.15)')
     document.documentElement.style.setProperty('--postBorderColor','rgba(0,0,0,0.5)')
     document.documentElement.style.setProperty('--boxShadowColor','0 0 0 1px rgba(0,0,0,.08)')
+    document.documentElement.style.setProperty('--anchorFontColor','rgba(0,0,0,.9)')
 }
 export const handleDark =()=>{
     document.documentElement.style.setProperty('--primaryColor','#1d2226')
@@ -17,6 +18,7 @@ export const handleDark =()=>{
     document.documentElement.style.setProperty('--boxColor','rgba(255,255,255,.15)')
     document.documentElement.style.setProperty('--postBorderColor','rgba(255,255,255,0.5)')
     document.documentElement.style.setProperty('--boxShadowColor','0 0 0 1px rgba(255,255,255,.08)')
+    document.documentElement.style.setProperty('--anchorFontColor','rgba(254,222,179,.9)')
 }
 export const LightDarkComponent =()=>{
     const [isLight, setIsLight] = useState(false)

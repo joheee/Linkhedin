@@ -5,6 +5,7 @@ import { ForgotPage } from './components/auth/page/ForgotPage'
 import { ResetPassPage } from './components/auth/page/ResetPassPage'
 import { VerificationPage } from './components/auth/page/VerificationPage'
 import { HomePage } from './components/home/page/HomePage'
+import { JobPage } from './components/jobs/page/JobPage'
 import { MyNetworkPage } from './components/myNetwork/page/MyNetworkPage'
 import { SearchPage } from './components/search/page/SearchPage'
 import { handleDark, handleLight } from './components/server/base/LightDarkComponent'
@@ -36,7 +37,7 @@ function App() {
               <Route path="/home" element={<HomePage/>}/>
               <Route path="/search/:keyword" element={<SearchPage/>}/>
               <Route path="/mynetwork" element={<MyNetworkPage/>}/>
-              <Route path="/jobs" element={<MyNetworkPage/>}/>
+              <Route path="/jobs" element={<JobPage/>}/>
 
             </Routes>
           </BrowserRouter>
