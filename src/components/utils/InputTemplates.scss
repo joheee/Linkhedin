@@ -13,19 +13,19 @@
     height: 32px;
 
     &:hover{
-        border-color: rgba($color:#000, $alpha:0.3);
+        border-color: var(--postBorderColor);
         &::placeholder {
-            color: rgba($color:#000, $alpha:0.3);
+            color: var(--fontColor);
         }
     }
     &::placeholder{
-        color:black;
+        color:var(--fontColor);
     }
     &:focus{
         border-color: var(--accentColor);
         color:var(--fontColor);
         &::placeholder{
-            color:white;
+            color:var(--fontColor);
         }
     }
 }

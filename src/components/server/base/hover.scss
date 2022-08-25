@@ -20,13 +20,13 @@
 }
 .ignore-button-effect {
     border-radius: 1.6rem;
-    color: var(--accentColor);
-    border: 1px solid var(--accentColor);
+    color: var(--fontColor);
     padding: .3rem 1rem;
     user-select: none;
     &:hover{
-        box-shadow: inset 0 0 0 1px var(--accentColor);
-        background-color: var(--accentButtonColor);
+        border: 1px solid var(--postBorderColor);
+        box-shadow: inset 0 0 0 1px var(--postBorderColor);
+        background-color: var(--boxColor);
         cursor: pointer;
     }
 }

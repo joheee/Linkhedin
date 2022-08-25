@@ -7,6 +7,7 @@ import { HomeContainerTemplates } from "../templates/profileTemplates/HomeContai
 import './HomePage.scss'
 
 export const HomePage =()=>{
+    
     return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
                 <NavbarHomeMobile/>
                 
