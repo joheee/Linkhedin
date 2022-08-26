@@ -76,3 +76,9 @@ export interface MyNetworkButtonInterface {
     text: string
     navigate: string
 }
+
+export interface JobMenuIconTemplatesInterface {
+    text:string
+    icon:string
+    navigate:string
+}

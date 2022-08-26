@@ -1,9 +1,10 @@
-import { Feed } from "../../home/assign/feed/Feed"
-import { Post } from "../../home/assign/post/Post"
-import { Profile } from "../../home/assign/profile/Profile"
+import { FooterResponsive } from "../../footer/assign/FooterResponsive"
 import { HomeContainerTemplates } from "../../home/templates/profileTemplates/HomeContainerTemplates"
 import { NavbarHomeMobile } from "../../navigation/components/NavbarHomeMobile"
 import { BackgroundManager, HandleBackground } from "../../utils/BackgroundManager"
+import { BoxInnerTemplates } from "../../utils/BoxInnerTemplates"
+import { BoxTemplates } from "../../utils/BoxTemplates"
+import { JobMenu } from "../assign/jobMenu/JobMenu"
 
 export const JobPage =()=>{
     return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
@@ -11,9 +12,15 @@ export const JobPage =()=>{
                 
                 <HomeContainerTemplates>
 
-                    <Profile/>
-                    <Post/>
-                    <Feed/>
+                    <JobMenu/>
+                    
+                    <BoxTemplates>
+                        <BoxInnerTemplates>
+                            first component
+                        </BoxInnerTemplates>
+                    </BoxTemplates>
+
+                    <FooterResponsive/>
 
                 </HomeContainerTemplates>
 

@@ -5,6 +5,7 @@ import './LightDarkComponent.scss'
 export const handleLight =()=>{
     document.documentElement.style.setProperty('--primaryColor','#fff')
     document.documentElement.style.setProperty('--secondaryColor','#f3f2ef')
+    document.documentElement.style.setProperty('--accentColor','#0a66c2')
     document.documentElement.style.setProperty('--fontColor','rgba(0,0,0,.9)')
     document.documentElement.style.setProperty('--boxColor','rgba(0,0,0,.15)')
     document.documentElement.style.setProperty('--postBorderColor','rgba(0,0,0,0.5)')
@@ -14,6 +15,7 @@ export const handleLight =()=>{
 export const handleDark =()=>{
     document.documentElement.style.setProperty('--primaryColor','#1d2226')
     document.documentElement.style.setProperty('--secondaryColor','#000')
+    document.documentElement.style.setProperty('--accentColor','#70b5f9')
     document.documentElement.style.setProperty('--fontColor','rgba(255,255,255,.9)')
     document.documentElement.style.setProperty('--boxColor','rgba(255,255,255,.15)')
     document.documentElement.style.setProperty('--postBorderColor','rgba(255,255,255,0.5)')

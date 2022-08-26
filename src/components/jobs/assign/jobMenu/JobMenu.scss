@@ -1,0 +1,24 @@
+.job-menu-component-container{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .job-menu-icon-inner-container{
+        padding: 1rem;
+        .manage-my-job-header-component{
+            padding: 0 0 .5rem .5rem;
+            font-weight: bold;
+        }
+        .set-width {
+            width: 20rem;
+        }
+        .show-button-job-component{
+            display: inline-block;
+            padding: .5rem;
+        }
+    }
+    .post-a-job-button-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+    }
+}
