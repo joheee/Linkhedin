@@ -1,0 +1,14 @@
+.recommend-job-container {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    .recommend-job-header-container{
+        font-weight: bold;
+    }
+    .recommend-job-etc-container{
+        font-size: .8rem;
+        margin: 0 0 .5rem 0;
+    }
+
+}

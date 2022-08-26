@@ -79,6 +79,14 @@ export interface MyNetworkButtonInterface {
 
 export interface JobMenuIconTemplatesInterface {
     text:string
-    icon:string
-    navigate:string
+    icon?:string
+    navigate?:string
+}
+
+export interface RecommendJobCardInterface {
+    picture?: string
+    title: string
+    company: string
+    location: string
+    savedBy?: Array<string>
 }

@@ -4,7 +4,7 @@ import './JobMenuIconTemplates.scss'
 
 export const JobMenuIconTemplates =(prop:JobMenuIconTemplatesInterface)=>{
     const navigate = useNavigate()
-    return  <div className="job-menu-icon-templates-container feed-hover" onClick={()=>navigate(prop.navigate)}>
+    return  <div className="job-menu-icon-templates-container feed-hover" onClick={()=>navigate(prop.navigate as string)}>
                 <div className={`${prop.icon} job-menu-icon-component`}></div>
                 <div className="job-menu-text-component">{prop.text}</div>
             </div>
