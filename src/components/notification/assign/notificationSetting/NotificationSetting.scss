@@ -1,0 +1,40 @@
+.notification-setting-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    font-size: 1rem;
+    .notification-setting-header-container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        .notification-setting-header-text-container{
+            text-align: start;
+        }
+    }
+    .notification-setting-button-view-container{
+        color: var(--accentColor);
+        font-weight: bold;
+        user-select: none;
+        text-align: center;
+        &:hover {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+    }
+}
+@media screen and (max-width:850px){
+    .notification-setting-container {
+        display: flex;
+        flex-direction: row;
+        padding: 1rem;
+        justify-content: space-between;
+        .notification-setting-header-container{
+            flex-direction: row;
+        }
+    }
+}
