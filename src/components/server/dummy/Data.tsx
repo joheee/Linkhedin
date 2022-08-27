@@ -68,3 +68,44 @@ export const dummyUser = [
         ]   
     }
 ]
+
+export const dummyRecommendJob = [
+    {
+        picture:'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II',
+        title:'graduate tech analyst',
+        company:'accenture southeast asia',
+        location:'jakarta, jakarta raya, indonesia',
+        savedBy: ['johevin','adam']
+    },
+    {
+        picture:'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II',
+        title:'graduate tech analyst',
+        company:'accenture southeast asia',
+        location:'jakarta, jakarta raya, indonesia',
+        savedBy: ['johevin','adam']
+    },
+    {
+        picture:'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II',
+        title:'graduate tech analyst',
+        company:'accenture southeast asia',
+        location:'jakarta, jakarta raya, indonesia',
+        savedBy: ['johevin','adam']
+    },
+]
+
+export const dummyNotification = [
+    {
+        picture:'./default-Profile.png',
+        info:'has follow you ma men',
+        createBy:'johevin',
+        receiver:['adam','ughtea'],
+        createdAt:'7 jan'
+    },{
+        picture:'./default-Profile.png',
+        info:'has love you',
+        createBy:'johevin',
+        receiver:['adam','ughtea'],
+        createdAt:'4 jan'
+    }
+    
+]
