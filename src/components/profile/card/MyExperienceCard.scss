@@ -1,0 +1,19 @@
+.my-experience-card-container{
+    display: flex;
+    align-items: center;
+    gap:1rem;
+    font-size: 1rem;
+    .my-experience-card-image-container{
+        width:3rem;
+        height:3rem;
+        img {
+            width:100%;
+        }
+    }
+    .my-experience-card-title{
+        font-weight: bold;
+    }
+    .my-experience-card-external{
+        font-size: .8rem;
+    }
+}

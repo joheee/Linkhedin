@@ -30,3 +30,10 @@
         cursor: pointer;
     }
 }
+.blue-hover {
+    &:hover {
+        cursor: pointer;
+        color: var(--accentColor);
+        text-decoration: underline;
+    }
+}

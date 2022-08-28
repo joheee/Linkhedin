@@ -12,7 +12,7 @@ export const NavbarAdditionalTemplates =({...attr}:any)=>{
                 <NavbarIconTemplates type='fa-solid fa-briefcase' text='jobs'  onClick={()=> navigate('/jobs')}/>
                 <NavbarIconTemplates type='fa-solid fa-comment-dots' text='messaging' onClick={()=> navigate('/messages')}/>
                 <NavbarIconTemplates type='fa-solid fa-bell' text='notifications'  onClick={()=> navigate('/notifications')}/>
-                <NavbarIconTemplates text='me'>
+                <NavbarIconTemplates text='me' onClick={()=> navigate('/myprofile')}>
                     <ProfilePictureTemplates src='/default-profile.png' width='2rem' height='2rem'/>
                 </NavbarIconTemplates>
             </div>

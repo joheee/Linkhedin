@@ -1,0 +1,30 @@
+.my-activity-container {
+    padding: 1rem;
+    font-size: 1rem;
+    .my-activity-header {
+        display: flex;
+        justify-content: space-between;
+        .my-activity-text{
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        .my-activity-follower {
+            font-size: .8rem;
+            color: var(--accentColor);
+            &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+            }
+        }
+        .fa-solid {
+            padding: .5rem;
+            border-radius: 50%;
+        }
+    }
+    .my-activity-see-more{
+        text-align: center;
+        padding: .5rem;
+        margin-top: 1rem;
+        border-radius: .5rem;
+    }
+}

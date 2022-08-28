@@ -1,0 +1,13 @@
+.my-skill-card-container {
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    .my-skill-card-title {
+        font-weight: bold;
+    }
+    .my-skill-card-footer {
+        display: flex;
+        gap: 1rem;
+    }
+}

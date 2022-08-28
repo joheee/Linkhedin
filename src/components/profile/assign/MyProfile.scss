@@ -1,0 +1,89 @@
+.my-profile-parent-container{
+    display: flex;
+    flex-direction: column;
+    .my-profile-banner{
+        width: 100%;
+        position: relative;
+        .camera-placement {
+            position: absolute;
+            top: 5%;
+            right: 1%;
+            background-color: var(--primaryColor);
+            padding: .5rem;
+            border-radius: 50%;
+        }
+        .pen-placement{
+            position: absolute;
+            right: 1%;
+            top: 100%;
+            color: var(--primaryColor);
+            background-color: var(--fontColor);
+            padding: .5rem;
+            border-radius: 50%;
+        }
+
+        img {
+            width: 100%;
+        }
+        .my-profile-picture {
+            position: absolute;
+            top: 30%;
+            left: 5%;
+            width: 20%;
+            background-color: var(--primaryColor);
+            padding: .4rem;
+            border-radius: 50%;
+            img {
+                width: 100%;
+            }
+        }
+    }
+    .my-profile-info-container{
+        padding: 2rem 1rem 1rem;
+        font-size: 1rem;
+        .my-profile-full-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+        }
+        .my-profile-follower-connections{
+            display: flex;
+            gap: 1rem;
+            color: var(--accentColor);
+            .hover {
+                &:hover {
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+            }
+        }
+        .my-profile-button-container{
+            display: flex;
+            gap:1rem;
+            align-items: center;
+            position:relative;
+            .fa-solid {
+                padding: .4rem;
+                border-radius: 50%;
+            }
+            .my-profile-pop-up-button{
+                position: absolute;
+                top: -3rem;
+                left: 2.5rem;
+                padding: .1rem;
+                background-color: var(--primaryColor);
+                border-radius: .5rem;
+                box-shadow: var(--boxShadowColor);
+                .pop-up-button{
+                    padding: .3rem 1rem;
+                    border-radius: .5rem;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (min-width:850px) {
+    .my-profile-parent-container {
+        max-width: 46rem;
+    }
+}

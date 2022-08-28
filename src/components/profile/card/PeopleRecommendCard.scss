@@ -1,0 +1,14 @@
+.people-recommend-card-message-connect-button {
+    max-width: fit-content;
+    margin-top: .5rem;
+    padding: .4rem 1rem;
+    border-radius: 1.6rem;
+    border: 1px solid var(--postBorderColor);
+    color: var(--postBorderColor);
+    user-select: none;
+    &:hover {
+        border: 1px solid var(--fontColor);
+        color: var(--fontColor);
+        cursor: pointer;
+    }
+}

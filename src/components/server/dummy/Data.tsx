@@ -109,3 +109,20 @@ export const dummyNotification = [
     }
     
 ]
+export const dummyExperience = [
+    {
+        picture:'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II',
+        title:'teaching assistant at SLC',
+        company:'bina nusantara university',
+        timestamp:'feb 2022',
+        location:'jakarta barat, indonesia',
+    },{
+        picture:'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II',
+        title:'teaching assistant at SLC',
+        company:'bina nusantara university',
+        timestamp:'feb 2022',
+        location:'jakarta barat, indonesia',
+    },
+]
+
+

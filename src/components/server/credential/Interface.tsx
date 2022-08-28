@@ -90,3 +90,11 @@ export interface RecommendJobCardInterface {
     location: string
     savedBy?: Array<string>
 }
+
+export interface MyExperienceCardInterface {
+    picture:string
+    title:string
+    company:string
+    timestamp:string
+    location:string
+}

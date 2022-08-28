@@ -1,0 +1,18 @@
+.people-you-may-know-container{
+    padding: 1rem;
+    font-size: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap:1rem;
+    .people-you-may-know-header{
+        font-weight: bold;
+    }
+}
+
+@media screen and (min-width: 850px){
+    .people-you-may-know-container{
+        padding: 1rem;
+        font-size: 1rem;
+        max-width: 19rem;
+    }
+}
