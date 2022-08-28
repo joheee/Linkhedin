@@ -63,7 +63,7 @@ export interface LoadingAnimationInterface {
 }
 
 export interface RichTextInterface {
-	content: string;
+	content: string
 }
 
 export interface SearchPopUpInterface {

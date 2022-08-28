@@ -29,7 +29,7 @@ export const JobMenu =()=>{
                                     <JobMenuIconTemplates text='application settings' icon='fa-solid fa-gear' navigate=''/>
                                 </div>
                                 : null}
-                                <div className="set-width"></div>
+                                <div className="set-width-job"></div>
                                 <div className="show-button-job-component feed-hover" onClick={()=>setIsPopUp(!isPopUp)}>{isPopUp === false ? "show more":"show less"}</div>
                             </div>
                         </BoxCustomInnerTemplates>

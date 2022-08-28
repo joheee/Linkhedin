@@ -6,6 +6,7 @@ import { ResetPassPage } from './components/auth/page/ResetPassPage'
 import { VerificationPage } from './components/auth/page/VerificationPage'
 import { HomePage } from './components/home/page/HomePage'
 import { JobPage } from './components/jobs/page/JobPage'
+import { MessagesPage } from './components/messages/page/MessagesPage'
 import { MyNetworkPage } from './components/myNetwork/page/MyNetworkPage'
 import { NotificationPage } from './components/notification/page/NotificationPage'
 import { SearchPage } from './components/search/page/SearchPage'
@@ -39,8 +40,10 @@ function App() {
               <Route path="/search/:keyword" element={<SearchPage/>}/>
               <Route path="/mynetwork" element={<MyNetworkPage/>}/>
               <Route path="/jobs" element={<JobPage/>}/>
-
               <Route path="/notifications" element={<NotificationPage/>}/>
+
+              <Route path="/messages/:messageIndex" element={<MessagesPage/>}/>
+              <Route path="/messages/" element={<MessagesPage/>}/>
 
             </Routes>
           </BrowserRouter>

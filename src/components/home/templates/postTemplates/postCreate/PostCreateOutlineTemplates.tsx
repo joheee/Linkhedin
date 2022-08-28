@@ -12,7 +12,7 @@ export const PostCreateOutlineTemplates =({setIsPost}:{setIsPost:(active:boolean
                         <div onClick={()=>setIsPost(false)} className="fa-solid feed-hover">x</div>
                     </div>
                     <RecommendPersonTemplates {...dummyUser[0]}/>
-                    <RichTextTemplates/>
+                    <RichTextTemplates content='what do you want to talk about?'/>
                     <PostPictureVideoTemplates/>
                 </div>
             </div>

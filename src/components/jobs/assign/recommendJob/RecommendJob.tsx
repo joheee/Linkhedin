@@ -14,8 +14,8 @@ export const RecommendJob =()=>{
                     </div>
                    
                     {
-                        dummyRecommendJob.map(job => (
-                            <div className="">
+                        dummyRecommendJob.map((job,i) => (
+                            <div className="" key={i}>
                                 <RecommendJobCard {...job}/>
                             </div>
                         ))

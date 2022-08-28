@@ -1,0 +1,24 @@
+.message-page-assign-header-search-people-container{
+    font-size: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    .message-page-assign-container{
+        .message-page-assign-header-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+    input {
+        display: inline-flex;
+        border: none;
+        background-color: var(--searchColor);
+        color: --fontColor;
+        height: 2.2rem;
+        padding: 0 0.5rem;
+        border-radius: 0.4rem;
+    }
+
+}
