@@ -51,7 +51,7 @@ export const Register = () => {
             <ButtonTemplates onClick={()=>handleRegister()} text='register'/>
             
             <HeaderTemplates text='or' style={{fontSize:"2rem"}}/>
-            <ButtonGoogleLogin text='login with google'/>
+            {/* <ButtonGoogleLogin text='login with google'/> */}
             <SignTemplates onClick={() => loginRegisterContext?.setIsLogin(!loginRegisterContext.isLogin)} text='sign in'/>
 
         </AuthTemplates>

@@ -35,7 +35,7 @@ export const Login = () => {
             text='login'/>
 
             <HeaderTemplates text='or' style={{fontSize:"1.2rem", fontWeight:"100"}}/>
-            <ButtonGoogleLogin text='login with google'/>
+            {/* <ButtonGoogleLogin text='login with google'/> */}
             <SignTemplates onClick={() => loginRegisterContext?.setIsLogin(!loginRegisterContext.isLogin)} text='sign up'/>
 
         </AuthTemplates>
