@@ -10,10 +10,10 @@
         display: flex;
         gap: 1rem;
         .chat-box-profile-image-container {
-            width: 3rem;
-            height: 3rem;
+            width: 2rem;
+            height: 2rem;
             img {
-                width: 100%;
+                width: 2rem;
             }
         }
     }
@@ -21,19 +21,32 @@
         .chat-bubble-inner-sender {
             background-color: var(--accentColor);
             color: white;
-            max-width: 30rem;
             padding: .5rem;
             border-radius: .5rem;
+            margin-right: 6rem;
         }
     }
     .chat-bubble-receiver {
         flex-direction: row-reverse;
         .chat-bubble-inner-receiver {
             background-color: tan;
-            max-width: 30rem;
             padding: .5rem;
             border-radius: .5rem;
-        }
+            margin-left: 6rem;
 
+        }
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .chat-bubble-sender {
+        .chat-bubble-inner-sender {
+            font-size: .8rem;
+        }
+    }
+    .chat-bubble-receiver {
+        .chat-bubble-inner-receiver {
+            font-size: .8rem;
+        }
     }
 }
