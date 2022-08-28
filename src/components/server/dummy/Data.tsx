@@ -95,13 +95,13 @@ export const dummyRecommendJob = [
 
 export const dummyNotification = [
     {
-        picture:'./default-Profile.png',
+        picture:'/default-Profile.png',
         info:'has follow you ma men',
         createBy:'johevin',
         receiver:['adam','ughtea'],
         createdAt:'7 jan'
     },{
-        picture:'./default-Profile.png',
+        picture:'/default-Profile.png',
         info:'has love you',
         createBy:'johevin',
         receiver:['adam','ughtea'],
