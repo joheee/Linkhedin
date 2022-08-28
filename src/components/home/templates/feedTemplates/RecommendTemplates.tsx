@@ -7,8 +7,10 @@ export const RecommendTemplates =()=>{
 
     return  <div className="recommend-map-container">
                 {
-                    dummyUser.slice(0,3).map((item:RecommendCardInterface, i) => (
-                        <RecommendCard {...item} key={i}/>
+                    dummyUser.slice(0,3).map((item, i) => (
+                        <div key={i}>
+                            <RecommendCard {...item}/>
+                        </div>
                     ))
                 }
             </div>
