@@ -9,7 +9,6 @@ import { NavbarTemplates } from "../../navigation/templates/NavbarTemplates"
 import { FooterAuth } from "../../footer/assign/FooterAuth"
 import { BackgroundManager, HandleBackground } from "../../utils/BackgroundManager"
 
-
 export const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true)
     useGoogleLoginCustom()

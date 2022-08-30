@@ -7,7 +7,7 @@ export const useGoogleLoginCustom =()=>{
         const start =()=>{
             gapi.client.init({
                 clientId: googleClientID,
-                scope:''
+                scope:""
             })
         }
         gapi.load('client:auth2', start)

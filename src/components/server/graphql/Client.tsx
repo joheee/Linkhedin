@@ -1,9 +1,13 @@
-import { ApolloClient, InMemoryCache } from "@apollo/client";
+import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
 
 export const GetClient =()=>{
-    const client = new ApolloClient({
-        uri: 'http://localhost:8080/query',
-        cache: new InMemoryCache()
-      })
-    return client
+  return new ApolloClient({
+    link: new HttpLink({
+      uri: 'https://binterest.hasura.app/v1/graphql',
+      headers: {
+        'x-hasura-admin-secret': `mJdIAJ1vY9nCTlYSRVpFdn3SlpidB1hkqkCSjy6MJKO627qBsDg2jN41YYYki2QB`
+      }
+    }),
+    cache: new InMemoryCache()
+  })
 }

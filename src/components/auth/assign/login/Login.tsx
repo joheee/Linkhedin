@@ -1,23 +1,76 @@
-import { useContext, useState } from "react"
+import { gapi } from "gapi-script"
+import { useContext, useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { AllUserContext, LoginRegisterContext } from "../../../server/credential/Context"
-import { ButtonGoogleLogin } from "../../../utils/ButtonGoogleLogin"
 import { ButtonTemplates } from "../../../utils/ButtonTemplates"
-import { ErrorMessages } from "../../../utils/ErrorMessages"
 import { HeaderTemplates } from "../../../utils/HeaderTemplates"
 import { InputTemplates } from "../../../utils/InputTemplates"
 import { SignTemplates } from "../../../utils/SignTemplates"
-import { LoginController } from "../../controller/LoginController"
 import { AuthTemplates } from "../../templates/AuthTemplates"
+import GoogleButton from 'react-google-button'
+import { UserAuth } from "../../../utils/AuthContextProvider"
+import { Auth } from "../../../server/firebase/FirebaseHelper"
+import { onAuthStateChanged } from 'firebase/auth'
+import toast from 'react-hot-toast';
+import { useQuery } from "@apollo/client"
+import { GET_USER } from "../../../server/query/QueryList"
+import { LoadingAnimation } from "../../../utils/LoadingAnimation"
+import { sendEmail } from "../register/Register"
 
 export const Login = () => {
     const loginRegisterContext = useContext(LoginRegisterContext)
     const [userEmailInput, setUserEmailInput] = useState('')
     const [passInput, setPassInput] = useState('')
-    const [errorMsg, setError] = useState('')
-    const allUserContext = useContext(AllUserContext)
     const navigate = useNavigate()
+    const handleAuth = UserAuth()
+    const { loading, error, data } = useQuery(GET_USER);
 
+    const handleGoogleSignIn =()=>{
+        console.log('here')
+        handleAuth!.googleSignIn()
+        onAuthStateChanged(Auth, (user) => {
+            for(let i = 0; i < data.User.length; i++) {
+                if(data.User[i].email === user!.email) {
+                    const getLocal = JSON.parse(localStorage.getItem(data.User[i].email)!)
+                    console.log(getLocal)
+                    if(getLocal === null) {
+                        const randVerif = Math.floor(100000 + Math.random() * 900000)
+                        localStorage.setItem(data.User[i].email, JSON.stringify({username:data.User[i].email ,email:data.User[i].email, password:data.User[i].email, code:randVerif, isVerif:false}))
+                        sendEmail(data.User[i].username!, randVerif)
+                        navigate(`auth/verification/${btoa(data.User[i].email!)}`)
+                        return
+                    } else {
+                        localStorage.setItem('current_login', JSON.stringify({username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
+                        toast(
+                            `welcome ${data.User[i].username}`,
+                            {
+                              duration: 3000,
+                            }
+                          )
+                        navigate(`/home`)
+                    }
+                } 
+            }
+        })
+    }    
+
+    const handleButtonLogin =()=>{
+        if(userEmailInput === '' || passInput === '') {
+            toast.error('all field must be filled')
+            return
+        } else {
+            data.User.forEach((item:any) => {
+                if(item.email === userEmailInput && item.password === passInput) {
+                    localStorage.setItem('current_login', JSON.stringify({username:item.username,email:item.email,password:item.password}))
+                    navigate('/home')
+                } else {
+                    toast.error('invalid email or password')
+                }
+            })
+        }
+    }
+
+    if(loading) return <LoadingAnimation height="50" width="100"/>
     return <AuthTemplates>
 
             <HeaderTemplates text='login'/>
@@ -29,13 +82,14 @@ export const Login = () => {
                 <SignTemplates text='forgot password?'/>
             </Link>
 
-            {errorMsg === '' ? null: <ErrorMessages text={errorMsg}/>}
             <ButtonTemplates
-                onClick={()=>navigate('/home')}
+                onClick={()=>handleButtonLogin()}
             text='login'/>
 
             <HeaderTemplates text='or' style={{fontSize:"1.2rem", fontWeight:"100"}}/>
-            {/* <ButtonGoogleLogin text='login with google'/> */}
+
+            <GoogleButton onClick={() => {handleGoogleSignIn()}}/>
+
             <SignTemplates onClick={() => loginRegisterContext?.setIsLogin(!loginRegisterContext.isLogin)} text='sign up'/>
 
         </AuthTemplates>
