@@ -1,9 +1,16 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { dummyUser } from '../../server/dummy/Data'
 import { BoxInnerTemplates } from '../../utils/BoxInnerTemplates'
 import './MyProfile.scss'
 export const MyProfile =()=>{
     const [isButton,setIsButton] = useState(false)
+    const navigate = useNavigate()
+    const handleLogout =()=>{
+        localStorage.removeItem('current_login')
+        navigate('/')
+    }
+
     return  <BoxInnerTemplates>
                 <div className="my-profile-parent-container">
                     <div className="my-profile-banner">
@@ -35,6 +42,7 @@ export const MyProfile =()=>{
                                 : null
                             }
                         </div>
+                        <div className="my-profile-logout follow-button-effect" onClick={()=>handleLogout()}>logout</div>
                     </div>
                 </div>
             </BoxInnerTemplates>

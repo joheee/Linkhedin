@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react"
+import { createContext, useContext, useEffect } from "react"
 import {
     GoogleAuthProvider,
     signInWithPopup,
@@ -6,6 +6,7 @@ import {
     onAuthStateChanged
 } from 'firebase/auth'
 import { Auth } from "../server/firebase/FirebaseHelper"
+import { useNavigate } from "react-router-dom"
 
 interface AuthInterface {
     googleSignIn:()=>void
@@ -14,6 +15,7 @@ interface AuthInterface {
 const AuthContext = createContext<AuthInterface | null>(null)
 
 export const AuthContextProvider =({children}:any)=>{
+
     const googleSignIn =()=>{
         const provider = new GoogleAuthProvider()
         signInWithPopup(Auth,provider)

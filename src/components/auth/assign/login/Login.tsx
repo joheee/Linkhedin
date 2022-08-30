@@ -29,26 +29,17 @@ export const Login = () => {
         console.log('here')
         handleAuth!.googleSignIn()
         onAuthStateChanged(Auth, (user) => {
+            console.log(user)
             for(let i = 0; i < data.User.length; i++) {
                 if(data.User[i].email === user!.email) {
-                    const getLocal = JSON.parse(localStorage.getItem(data.User[i].email)!)
-                    console.log(getLocal)
-                    if(getLocal === null) {
-                        const randVerif = Math.floor(100000 + Math.random() * 900000)
-                        localStorage.setItem(data.User[i].email, JSON.stringify({username:data.User[i].email ,email:data.User[i].email, password:data.User[i].email, code:randVerif, isVerif:false}))
-                        sendEmail(data.User[i].username!, randVerif)
-                        navigate(`auth/verification/${btoa(data.User[i].email!)}`)
-                        return
-                    } else {
-                        localStorage.setItem('current_login', JSON.stringify({username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
-                        toast(
-                            `welcome ${data.User[i].username}`,
-                            {
-                              duration: 3000,
-                            }
-                          )
-                        navigate(`/home`)
-                    }
+                    localStorage.setItem('current_login', JSON.stringify({username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
+                    toast(
+                        `welcome ${data.User[i].username}`,
+                        {
+                            duration: 3000,
+                        }
+                        )
+                    navigate(`/home`)
                 } 
             }
         })

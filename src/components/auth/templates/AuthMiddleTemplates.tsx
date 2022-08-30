@@ -8,7 +8,7 @@ export const AuthMiddleTemplates=({children,...attr}:any)=>{
     useEffect(()=>{
         const getCurrentUser = JSON.parse(localStorage.getItem('current_login')!)
         console.log(getCurrentUser)
-        if(getCurrentUser !== null) {
+        if(getCurrentUser !== null && getCurrentUser !== undefined) {
             toast(
                 `welcome ${getCurrentUser.username}`,
                 {
@@ -17,7 +17,7 @@ export const AuthMiddleTemplates=({children,...attr}:any)=>{
               )
             navigate(`/home`)
         }
-    },[])
+    })
     
     return <div {...attr} id='auth-middle-templates-component'>{children}</div>
 }
