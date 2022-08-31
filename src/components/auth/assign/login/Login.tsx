@@ -12,10 +12,11 @@ import { UserAuth } from "../../../utils/AuthContextProvider"
 import { Auth } from "../../../server/firebase/FirebaseHelper"
 import { onAuthStateChanged } from 'firebase/auth'
 import toast from 'react-hot-toast';
-import { useQuery } from "@apollo/client"
+import { useMutation, useQuery } from "@apollo/client"
 import { GET_USER } from "../../../server/query/QueryList"
 import { LoadingAnimation } from "../../../utils/LoadingAnimation"
 import { sendEmail } from "../register/Register"
+import { REGISTER_USER } from "../../../server/mutation/MutationList"
 
 export const Login = () => {
     const loginRegisterContext = useContext(LoginRegisterContext)
@@ -23,41 +24,70 @@ export const Login = () => {
     const [passInput, setPassInput] = useState('')
     const navigate = useNavigate()
     const handleAuth = UserAuth()
-    const { loading, error, data } = useQuery(GET_USER);
-
+    const { loading, error, data,refetch } = useQuery(GET_USER)
+    const [insert_User_one, {}] = useMutation(REGISTER_USER)
+    
     const handleGoogleSignIn =()=>{
-        console.log('here')
         handleAuth!.googleSignIn()
         onAuthStateChanged(Auth, (user) => {
-            console.log(user)
             for(let i = 0; i < data.User.length; i++) {
-                if(data.User[i].email === user!.email) {
-                    localStorage.setItem('current_login', JSON.stringify({username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
-                    toast(
-                        `welcome ${data.User[i].username}`,
-                        {
-                            duration: 3000,
-                        }
-                        )
-                    navigate(`/home`)
+                if(data.User[i].email ===  user!.email){
+                    console.log('ajsodfisdf')
+                    if(data.User[i].verification === true) {
+                        localStorage.setItem('current_login', JSON.stringify({user_id:data.User[i].user_id, username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
+                        toast(`welcome ${data.User[i].username}`,
+                        {duration: 3000,
+                        })
+                        navigate(`/home`)
+                    } 
+                    else {
+                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(data.User[i].email!)}/${btoa('true')}`,
+                        `https://linkhedin.vercel.app/auth/verification/${btoa(data.User[i].email!)}/${btoa('true')}`)
+                        navigate(`auth/verification/${btoa(data.User[i].email!)}`)
+                    }
+                    return
                 } 
             }
-        })
-    }    
+            const newEmail =  user!.email
+            insert_User_one({
+                variables: {
+                    Username:newEmail,
+                    Email:newEmail,
+                    Password:newEmail
+                }
+            }).then(()=>{
+                refetch().then(()=>{
+                    console.log(data.User)
+                    sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
+                    `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
+                    navigate(`auth/verification/${btoa(newEmail!)}`)
+                })
+            })
+      })
+  }     
 
     const handleButtonLogin =()=>{
         if(userEmailInput === '' || passInput === '') {
             toast.error('all field must be filled')
             return
         } else {
-            data.User.forEach((item:any) => {
-                if(item.email === userEmailInput && item.password === passInput) {
-                    localStorage.setItem('current_login', JSON.stringify({username:item.username,email:item.email,password:item.password}))
-                    navigate('/home')
-                } else {
-                    toast.error('invalid email or password')
-                }
-            })
+            for(let i = 0; i < data.User.length; i++) {
+                if(data.User[i].email === userEmailInput && data.User[i].password === passInput) {
+                    if(data.User[i].verification === false) {
+                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(data.User[i].email !)}/${btoa('true')}`,
+                        `https://linkhedin.vercel.app/auth/verification/${btoa(data.User[i].email !)}/${btoa('true')}`)
+                        navigate(`auth/verification/${btoa(data.User[i].email !)}`)
+                    } else {
+                        localStorage.setItem('current_login', JSON.stringify({user_id:data.User[i].user_id, username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
+                        toast(`welcome ${data.User[i].username}`,
+                        {duration: 3000,
+                        })
+                        navigate(`/home`)
+                    }
+                    return
+                } 
+            }
+            toast.error('invalid email or password')
         }
     }
 

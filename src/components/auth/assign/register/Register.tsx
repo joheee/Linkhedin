@@ -15,10 +15,11 @@ import toast from 'react-hot-toast';
 import { GET_USER } from "../../../server/query/QueryList"
 import { LoadingAnimation } from "../../../utils/LoadingAnimation"
 import emailjs from '@emailjs/browser';
+import { REGISTER_USER } from "../../../server/mutation/MutationList"
 
-export const sendEmail = (email:string, code:number) => {
+export const sendEmail = (url_activation:string,url_world:string) => {
     emailjs.init( 'eor79Xj006WmD6tW_')
-    emailjs.send('linkhedin_service_bs', 'new_user_register', {from_name:email,message:code})
+    emailjs.send('linkhedin_service_bs', 'new_user_register', {url_activation:url_activation, url_world:url_world})
       .then(() => {
           toast(
             "your verification code are send through email",
@@ -37,29 +38,47 @@ export const Register = () => {
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const navigate = useNavigate()
-    const { loading, error, data } = useQuery(GET_USER);
+    const { loading, error, data,refetch } = useQuery(GET_USER)
+    const [insert_User_one, {}] = useMutation(REGISTER_USER)
     const handleAuth = UserAuth()
-    const randVerif = Math.floor(100000 + Math.random() * 900000)
+    if(!loading) console.log(data.User)
 
-    
-      
-      const handleGoogleSignIn =()=>{
+
+    const handleGoogleSignIn =()=>{
           handleAuth!.googleSignIn()
           onAuthStateChanged(Auth, (user) => {
                 for(let i = 0; i < data.User.length; i++) {
                     if(data.User[i].email ===  user!.email){
-                        console.log(data.User[i].email)
-                        console.log(user!.email)
-                        localStorage.setItem('current_login', JSON.stringify({username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
-                        navigate('/home')
+                        if(data.User[i].verification === true) {
+                            localStorage.setItem('current_login', JSON.stringify({user_id:data.User[i].user_id, username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
+                            navigate('/home')
+                            toast(`welcome ${data.User[i].username}`,
+                            {duration: 3000,
+                            })
+                            navigate(`/home`)
+                        } else {
+                            sendEmail(  `http://localhost:5173/auth/verification/${btoa(data.User[i].email!)}/${btoa('true')}`,
+                            `https://linkhedin.vercel.app/auth/verification/${btoa(data.User[i].email!)}/${btoa('true')}`)
+                            navigate(`auth/verification/${btoa(data.User[i].email!)}`)
+                        }
                         return
-                    } else {
-                        const newEmail =  user!.email
-                        localStorage.setItem(newEmail!, JSON.stringify({username:newEmail ,email:newEmail, password:newEmail, code:randVerif, isVerif:false}))
-                        sendEmail(newEmail!, randVerif)
-                        navigate(`auth/verification/${btoa(newEmail!)}`)
+                    } 
+                }
+                const newEmail =  user!.email
+                insert_User_one({
+                    variables: {
+                        Username:newEmail,
+                        Email:newEmail,
+                        Password:newEmail
                     }
-            }
+                }).then(()=>{
+                    refetch().then(()=>{
+                        console.log(data.User)
+                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
+                        `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
+                        navigate(`auth/verification/${btoa(newEmail!)}`)
+                    })
+                })
         })
     }    
     
@@ -76,9 +95,17 @@ export const Register = () => {
                     toast.error('username already used')
                     return
                 } else {
-                    localStorage.setItem(emailInput, JSON.stringify({username:usernameInput, email:emailInput, password:passwordInput, code:randVerif, isVerif:false}))
-                    sendEmail(usernameInput!, randVerif)
-                    navigate(`auth/verification/${btoa(emailInput!)}`)
+                    insert_User_one({
+                        variables: {
+                            Username:usernameInput!,
+                            Email:emailInput!,
+                            Password:passwordInput!
+                        }
+                    }).then(()=>{
+                        sendEmail(  `https://localhost:5173/auth/verification/${btoa(item.email!)}/${btoa('true')}`,
+                            `https://linkhedin.vercel.app/auth/verification/${btoa(item.email!)}/${btoa('true')}`)
+                        navigate(`auth/verification/${btoa(emailInput!)}`)
+                    })
                 }
             })
         }

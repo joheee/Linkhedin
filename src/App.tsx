@@ -40,8 +40,10 @@ function App() {
 
                   <Route path="/" element={<AuthPage/>}/>
                   <Route path="/auth/reset-password" element={<ForgotPage/>}/>
-                  <Route path="/auth/reset-password/new-password" element={<ResetPassPage/>}/>
-                  <Route path="/auth/verification/:email" element={<VerificationPage/>}/>
+                  <Route path="/auth/reset-password/new-password/:user_id" element={<ResetPassPage/>}/>
+                  
+                  <Route path="/auth/verification/:email/:isVerif" element={<VerificationPage/>}/>
+                  <Route path="/auth/verification/:email/" element={<VerificationPage/>}/>
 
                   <Route path="/home" element={<HomePage/>}/>
                   <Route path="/search/:keyword" element={<SearchPage/>}/>

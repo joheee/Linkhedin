@@ -1,53 +1,51 @@
-import { useEffect, useState } from "react"
-import { Link, useNavigate, useParams } from "react-router-dom"
-import { ButtonTemplates } from "../../../utils/ButtonTemplates"
+import { useNavigate, useParams } from "react-router-dom"
 import { HeaderTemplates } from "../../../utils/HeaderTemplates"
-import { InputTemplates } from "../../../utils/InputTemplates"
-import { SignTemplates } from "../../../utils/SignTemplates"
 import { AuthTemplates } from "../../templates/AuthTemplates"
 import toast from 'react-hot-toast';
-import { REGISTER_USER } from "../../../server/mutation/MutationList"
-import { useMutation } from "@apollo/client"
+import { UPDATE_USER_BY_PK_VERIFICATION } from "../../../server/mutation/MutationList"
+import { useMutation, useQuery } from "@apollo/client"
+import { GET_USER } from "../../../server/query/QueryList"
 
 export const Verification =()=>{
     const navigate = useNavigate()
     const {email} = useParams()
-    const getUser = JSON.parse(localStorage.getItem(atob(email!))!)
-    const [codeInput,setCodeInput] = useState('')
+    const {isVerif} = useParams()
+    const getUser = (atob(email!))
+    const [update_user_by_pk, prop] = useMutation(UPDATE_USER_BY_PK_VERIFICATION)
+    const { loading, error, data,refetch } = useQuery(GET_USER)
+    refetch()
 
-    const [insert_User_one, { data, loading, error }] = useMutation(REGISTER_USER)
-
-    const handleVerification =()=>{
-        if(codeInput === getUser.code.toString()){
-            getUser.isVerif = true
-            localStorage.setItem(atob(email!), JSON.stringify(getUser))
-            insert_User_one({
-                variables: {
-                    Username:getUser.username,
-                    Email:getUser.email,
-                    Password:getUser.password
-                }
-            })
-            .then(()=>{
-                localStorage.setItem('current_login', JSON.stringify({username:getUser.username,email:getUser.email,password:getUser.password}))
-                toast(
-                    `welcome ${getUser.username}`,
-                    {
-                      duration: 3000,
+    if(isVerif !== undefined) {
+        const getVerif = atob(isVerif!)
+        if (getVerif === 'true' && !loading) {
+            if(data.User.length !== null) {
+                data.User.forEach((item:any) => {
+                    if(item.email === getUser) {
+                        update_user_by_pk({
+                            variables: {
+                            user_id:item.user_id
+                        }
+                    })
+                    .then(()=>{
+                        localStorage.setItem('current_login', JSON.stringify({user_id:item.user_id, username:item.username,email:item.email,password:item.password}))
+                        refetch().then(()=>{
+                            toast(
+                                `welcome ${item.username}`,
+                                {
+                                    duration: 3000,
+                                }
+                                )
+                                navigate('/home')
+                            })
+                        })
                     }
-                  )
-                navigate('/home')
-            })
-        } else {
-            toast.error('verification invalid')
+                })
+            } 
         }
     }
 
     return  <AuthTemplates>
                 <HeaderTemplates text='verified our account' style={{fontSize:"2rem"}}/>
-                <InputTemplates  onChange={(e:any)=>setCodeInput(e.target.value)} type='text' placeholder='verification code'/>
-                <ButtonTemplates 
-                    onClick={()=>handleVerification()}
-                text='done'/>
+                <HeaderTemplates text='check your email' style={{fontSize:"1.5rem"}}/>
             </AuthTemplates>
 }

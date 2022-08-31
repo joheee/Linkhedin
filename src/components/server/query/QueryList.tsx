@@ -9,6 +9,7 @@ export const GET_USER = gql
         email
         password
         createdAt
+        verification
       }
     }
     `
