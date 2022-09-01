@@ -4,10 +4,10 @@ import { RecommendCardInterface, SearchPopUpInterface } from "../../../server/cr
 import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates"
 import './PeopleSearchTemplates.scss'
 
-export const PeopleSearchTemplates =({prop}:SearchPopUpInterface)=>{
+export const PeopleSearchTemplates =({prop}:any)=>{
     return  <div className="people-search-templates-container">
                 {
-                    prop.map((item:RecommendCardInterface,i)=>(
+                    prop.map((item:any,i:any)=>(
                         <Link to={`/profile/${item.username}`} key={i} className='search-pop-out-link-to-templates'>
                             <BoxInnerTemplates>
                                 <RecommendPersonTemplates {...item}/>

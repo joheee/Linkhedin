@@ -30,8 +30,8 @@ function App() {
           document.body.style.background = HandleBackground('--secondaryColor')
       }
     }
+ 
   },[])
-
   return  <ApolloProvider client={GetClient()}>
             <AuthContextProvider>
               <div><Toaster position="top-left" reverseOrder={false}/></div>

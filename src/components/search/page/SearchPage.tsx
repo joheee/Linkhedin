@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client"
 import { useParams } from "react-router-dom"
 import { FooterHome } from "../../footer/assign/home/FooterHome"
 import { FooterAttributeTemplates } from "../../footer/templates/FooterAttributeTemplates"
@@ -6,17 +7,28 @@ import { HomeContainerTemplates } from "../../home/templates/profileTemplates/Ho
 import { BoxCustomInnerTemplates } from "../../myNetwork/templates/BoxCustomInnerTemplates"
 import { NavbarHomeMobile } from "../../navigation/components/NavbarHomeMobile"
 import { dummyUser } from "../../server/dummy/Data"
+import { GET_CURRENT_USER, SEARCH_USER } from "../../server/query/QueryList"
 import { BackgroundManager, HandleBackground } from "../../utils/BackgroundManager"
 import { BoxInnerTemplates } from "../../utils/BoxInnerTemplates"
 import { BoxTemplates } from "../../utils/BoxTemplates"
 import { LoadingAnimation } from "../../utils/LoadingAnimation"
 import { PeopleSearchTemplates } from "../templates/people/PeopleSearchTemplates"
+import './SearchPage.scss'
 
 export const SearchPage =()=> {
     const {keyword} = useParams()
-    const filterData = dummyUser.filter(el => {return el.username.toLowerCase().includes(keyword!)})
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
+    const searchUser = useQuery(SEARCH_USER,{
+        variables:{
+            username:keyword!,
+            currentUser:getUser.username!
+        }
+    })
+    if(!searchUser.loading) console.log(searchUser.data.User)
     const filterPost = dummyUser.filter(f => f.posts.some(o => o.description.toLowerCase().includes(keyword!)))
 
+    if(searchUser.loading) return <div className=""></div>
     return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
                 <NavbarHomeMobile/>
                 
@@ -24,9 +36,14 @@ export const SearchPage =()=> {
 
                         <BoxTemplates>
                             <div className="post-container">
-                                <LoadingAnimation height="50" width="100"/>
-                                <PeopleSearchTemplates prop={filterData}/>
-                                <LoadingAnimation height="50" width="100"/>
+                                {searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)}).length === 0 ? 
+                                    <BoxInnerTemplates>
+                                        <div className="search-keyword-container">
+                                            "{keyword}" is not found :)
+                                        </div>
+                                    </BoxInnerTemplates> :
+                                    <PeopleSearchTemplates prop={searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)})}/>
+                                }
                                 <PostFirstMapCard prop={filterPost}/>
                                 <LoadingAnimation height="50" width="100"/>
                             </div>

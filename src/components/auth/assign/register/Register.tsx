@@ -73,7 +73,6 @@ export const Register = () => {
                     }
                 }).then(()=>{
                     refetch().then(()=>{
-                        console.log(data.User)
                         sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
                         `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
                         navigate(`auth/verification/${btoa(newEmail!)}`)
@@ -102,7 +101,7 @@ export const Register = () => {
                             Password:passwordInput!
                         }
                     }).then(()=>{
-                        sendEmail(  `https://localhost:5173/auth/verification/${btoa(item.email!)}/${btoa('true')}`,
+                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(item.email!)}/${btoa('true')}`,
                             `https://linkhedin.vercel.app/auth/verification/${btoa(item.email!)}/${btoa('true')}`)
                         navigate(`auth/verification/${btoa(emailInput!)}`)
                     })

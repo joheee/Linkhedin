@@ -9,7 +9,6 @@ export const NavbarHomeMobile =()=>{
     const navigate = useNavigate()
     useEffect(()=>{
         const getCurrentUser = localStorage.getItem('current_login')!
-        console.log(getCurrentUser)
         if(getCurrentUser === null) {
             navigate(`/`)
         }

@@ -32,7 +32,6 @@ export const Login = () => {
         onAuthStateChanged(Auth, (user) => {
             for(let i = 0; i < data.User.length; i++) {
                 if(data.User[i].email ===  user!.email){
-                    console.log('ajsodfisdf')
                     if(data.User[i].verification === true) {
                         localStorage.setItem('current_login', JSON.stringify({user_id:data.User[i].user_id, username:data.User[i].username,email:data.User[i].email,password:data.User[i].password}))
                         toast(`welcome ${data.User[i].username}`,
@@ -57,7 +56,6 @@ export const Login = () => {
                 }
             }).then(()=>{
                 refetch().then(()=>{
-                    console.log(data.User)
                     sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
                     `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
                     navigate(`auth/verification/${btoa(newEmail!)}`)

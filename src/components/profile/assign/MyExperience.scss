@@ -1,3 +1,50 @@
+.pop-up-create-new-experience{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--postBorderColor);
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    .pop-up-create-new-experience-box{
+        background-color: var(--primaryColor);
+        padding: 1rem;
+        border-radius: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        .pop-up-create-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            width: 100%;
+            .fa-solid {
+                padding: .5rem;
+                border-radius: 50%;
+            }
+        }
+        img {
+            width: 6.25rem;
+            height: 6.25rem;
+        }
+        .file {
+            .fa-solid {
+                padding:.5rem;
+                border-radius:50%;
+            }
+            input {
+                display:none;
+            }
+        }
+    }
+}
+
 .my-experience-container {
     padding: 1rem;
     display: flex;
