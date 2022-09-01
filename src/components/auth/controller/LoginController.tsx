@@ -7,12 +7,10 @@ export const LoginController =(prop:LoginControllerInterface)=>{
 
     if(findUsername.length !== 0) {
         if(findUsername[0].userID === findPassword[0].userID){
-            console.log('success login', findUsername[0], findPassword[0])
             return
         } 
     } else if(findEmail.length !== 0) {
         if(findEmail[0].userID === findPassword[0].userID){
-            console.log('success login', findEmail[0], findPassword[0])
             return
         }
     } 

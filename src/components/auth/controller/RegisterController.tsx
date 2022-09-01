@@ -4,7 +4,6 @@ export const RegisterController =(prop:RegisterControllerInterface)=>{
     const findUsername = prop.allUserContext!.filter((e:any)=>{return e.username === prop.usernameInput})
     const findEmail = prop.allUserContext!.filter((e:any)=>{return e.email === prop.emailInput})
     
-    console.log(findUsername, findEmail)
 
     if(prop.usernameInput === '' || prop.emailInput === '' || prop.passwordInput === '' || prop.rePasswordInput === ''){
         prop.setError('all field must be filled')

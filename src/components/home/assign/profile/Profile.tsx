@@ -17,13 +17,11 @@ export const Profile =()=>{
             username:getUser.username
         }
     })
-    console.log(getUser.username)
-    if(!loading)console.log(data.User)
     if(loading) return <div className=""></div>
     return  <BoxTemplates>
                 <BoxInnerTemplates>
                     <div className='profile-box-profile-container'>
-                        <ProfileBackgroundTemplates {...data.User[0].UserDetail}/>
+                        <ProfileBackgroundTemplates {...data.User[0]}/>
                         <div className="profile-info-container">
                             <NameDescTemplates {...data.User[0]}/>
                             <div className="profile-stats-container">

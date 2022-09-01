@@ -19,7 +19,7 @@ export const MyNetworkPage =()=>{
                             <BoxCustomInnerTemplates>
 
                                 <BoxInnerTemplates>
-                                <MyNetworkInvitation prop={dummyUser}/>
+                                <MyNetworkInvitation/>
                                 </BoxInnerTemplates>
                                 
                                 <UserYouMightKnow/>

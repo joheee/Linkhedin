@@ -4,13 +4,13 @@ import { getAuth } from 'firebase/auth'
 import { getStorage } from "firebase/storage"
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDTZRjsPWmS-_84S_q18G0gIMgwlJhs7SA",
-  authDomain: "linkhedin-360923.firebaseapp.com",
-  projectId: "linkhedin-360923",
-  storageBucket: "linkhedin-360923.appspot.com",
-  messagingSenderId: "474209665783",
-  appId: "1:474209665783:web:6da55abfbc4bc185c089f2",
-  measurementId: "G-7M35QEZ4XB"
+  apiKey: "AIzaSyBTqhxK1Bk-H0BNys44bxCxg-Mi54iUcmU",
+  authDomain: "linkhedin-pt2.firebaseapp.com",
+  projectId: "linkhedin-pt2",
+  storageBucket: "linkhedin-pt2.appspot.com",
+  messagingSenderId: "894660697855",
+  appId: "1:894660697855:web:b99f50ee3702b9367136ca",
+  measurementId: "G-FS6SLKLMTV"
 };
 
 const app = initializeApp(firebaseConfig)

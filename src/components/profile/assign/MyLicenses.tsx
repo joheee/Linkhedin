@@ -39,7 +39,6 @@ export const MyLicenses =()=>{
                     institute:companyInput!,
                 }
             }).then((e)=>{
-                console.log()
                 const userRef = ref(storage, `${data.User[0].username}/license/${e.data.insert_UserLicenses_one.license_id}`)
                 const metadata = {contentType : 'profile pic'}
                 uploadBytes(userRef, pictureInput, metadata)

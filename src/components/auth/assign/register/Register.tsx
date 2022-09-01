@@ -28,7 +28,6 @@ export const sendEmail = (url_activation:string,url_world:string) => {
             }
           )
       }, (error) => {
-          console.log(error.text);
       })
   }
 
@@ -41,8 +40,6 @@ export const Register = () => {
     const { loading, error, data,refetch } = useQuery(GET_USER)
     const [insert_User_one, {}] = useMutation(REGISTER_USER)
     const handleAuth = UserAuth()
-    if(!loading) console.log(data.User)
-
 
     const handleGoogleSignIn =()=>{
           handleAuth!.googleSignIn()

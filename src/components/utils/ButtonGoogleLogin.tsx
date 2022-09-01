@@ -6,10 +6,8 @@ import "./ButtonGoogleLogin.scss"
 export const ButtonGoogleLogin = ({text}:ButtonGoogleProp) => {
 
     const onSuccess = (res:any) => {
-        console.log('success ', res.profileObj)
     }
     const onFailure = (res:any) => {
-        console.log('failed ', res)
     }
 
     return <GoogleLogin

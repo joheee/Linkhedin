@@ -42,7 +42,6 @@ export const MyExperience =()=>{
                     location:locationInput!,
                 }
             }).then((e)=>{
-                console.log()
                 const userRef = ref(storage, `${data.User[0].username}/experience/${e.data.insert_UserExperience_one.experience_id}`)
                 const metadata = {contentType : 'profile pic'}
                 uploadBytes(userRef, pictureInput, metadata)

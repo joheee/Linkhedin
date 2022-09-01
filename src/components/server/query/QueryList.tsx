@@ -158,6 +158,7 @@ query GetOtherUser($username:String!){
       createdAt
       institute
     }
+    
   }
 }
 `
@@ -180,6 +181,44 @@ query SearchUser($username:String!, $currentUser:String!){
       username
     }
     
+  }
+}
+`
+
+export const GET_ALL_CONNECT = gql
+`
+query {
+	UserConnect {
+    connect_id
+		senderConnect
+  	receiverConnect
+    isConnected
+  }
+}
+`
+
+export const GET_REQUEST_CONNECT = gql
+`
+query GetRequestConnect($username:String!){
+	UserConnect(where:{receiverConnect:{_like:$username}}) {
+    connect_id
+		senderConnect
+  	receiverConnect
+    isConnected
+    createdAt
+  }
+}
+`
+
+export const GET_SPECIFIC_CONNECT = gql
+`
+query GetRequestConnect($receiverConnect:String!, $senderConnect:String!){
+	UserConnect(where:{receiverConnect:{_like:$receiverConnect}, senderConnect:{_like:$senderConnect}}) {
+    connect_id
+		senderConnect
+  	receiverConnect
+    isConnected
+    createdAt
   }
 }
 `

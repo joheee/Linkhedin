@@ -273,3 +273,39 @@ mutation CreateNewLicenses($license_id:uuid!){
   }
 }
 `
+
+export const CONNECT_MECHANISM = gql 
+`
+mutation ConnectMecha($sender:String!,$receiver:String){
+  insert_UserConnect_one(object:{senderConnect:$sender, receiverConnect:$receiver}){
+    connect_id
+    isConnected
+    receiverConnect
+    senderConnect
+  }
+}
+`
+export const CONNECT_ACCEPT = gql
+`
+mutation GetRequestConnect($connect_id:uuid!){
+  update_UserConnect_by_pk(_set:{isConnected:true}, pk_columns:{connect_id:$connect_id}){
+  	connect_id
+		senderConnect
+  	receiverConnect
+    isConnected
+    createdAt
+  }
+}
+`
+export const CONNECT_REJECT = gql
+`
+mutation GetRequestConnect($connect_id:uuid!){
+  delete_UserConnect_by_pk(connect_id:$connect_id){
+  	connect_id
+		senderConnect
+  	receiverConnect
+    isConnected
+    createdAt
+  }
+}
+`

@@ -41,7 +41,6 @@ export const MyEducation =()=>{
                     location:locationInput!,
                 }
             }).then((e)=>{
-                console.log()
                 const userRef = ref(storage, `${data.User[0].username}/education/${e.data.insert_UserEducation_one.education_id}`)
                 const metadata = {contentType : 'profile pic'}
                 uploadBytes(userRef, pictureInput, metadata)

@@ -70,7 +70,6 @@ export const MyProfile =()=>{
 
     const [updatePhotoProfile] = useMutation(UPDATE_USER_BY_PK_NEW_PHOTO_PROFILE)
     const handleProfileImage = (e:any) => {
-        const file = e.target.files[0].name
         const userRef = ref(storage, `${data.User[0].username}/profile/profile-picture`)
         const metadata = {contentType : 'profile pic'}
         uploadBytes(userRef, e.target.files[0], metadata)
@@ -92,7 +91,6 @@ export const MyProfile =()=>{
     const [customBanner, setCustomBanner] = useState(false)
     const [updatePhotoBanner] = useMutation(UPDATE_USER_BY_PK_NEW_PHOTO_BANNER)
     const handleBannerImage = (e:any) => {
-        const file = e.target.files[0].name
         const userRef = ref(storage, `${data.User[0].username}/banner/banner-picture`)
         const metadata = {contentType : 'profile pic'}
         uploadBytes(userRef, e.target.files[0], metadata)
@@ -110,6 +108,9 @@ export const MyProfile =()=>{
             })
         })
     }
+
+    
+
     if(loading || all_user.loading) return <div className=""></div>
     return  <BoxInnerTemplates>
                 {

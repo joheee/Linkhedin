@@ -25,7 +25,6 @@ export const SearchPage =()=> {
             currentUser:getUser.username!
         }
     })
-    if(!searchUser.loading) console.log(searchUser.data.User)
     const filterPost = dummyUser.filter(f => f.posts.some(o => o.description.toLowerCase().includes(keyword!)))
 
     if(searchUser.loading) return <div className=""></div>
