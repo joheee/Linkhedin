@@ -1,11 +1,23 @@
+import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import { RichTextTemplates } from "../../home/templates/postTemplates/postCreate/RichTextTemplates"
+import "../../home/templates/postTemplates/postCreate/RichTextTemplates.scss"
 import { ChatBox } from "./ChatBox"
 import './PopUpChat.scss'
+import { VideoCall } from "./VideoCall"
 
-export const PopUpChat =()=> {
-    const {messageIndex} = useParams()
+export const PopUpChat =({prop}:any)=> {
+    const {username} = useParams()
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
+    const [isVideo, setIsVideo] = useState(false)
+    
     return  <div className="pop-up-chat-message-container">
+    
+                {
+                    isVideo === true ?
+                    <VideoCall setIsVideo={setIsVideo}/> : null
+                }
+
                 <Link to={'/messages'}>
                     <div className="pop-up-chat-message-black-screen"></div>
                 </Link>
@@ -15,24 +27,20 @@ export const PopUpChat =()=> {
                             <Link to={'/messages'}>
                                 <div className="fa-solid fa-arrow-left feed-hover"></div>
                             </Link>
-                            <div className="">{messageIndex}</div>
+                            <b className="">{atob(username!)}</b>
                         </div>
                         <div className="pop-up-chat-trash-video-container">
                             <div className="fa-solid fa-trash feed-hover"></div>
-                            <div className="fa-solid fa-video feed-hover"></div>
+                            <div className="fa-solid fa-video feed-hover" onClick={()=>setIsVideo(!isVideo)}></div>
                         </div>
                     </div>
 
                     <div className="set-width-pop-up"></div>
                     
-                    <ChatBox/>
-
-                    <RichTextTemplates content="type your message"/>
+                    <ChatBox 
+                    currentUser={prop.find((user:any) => user.username === getUser.username)} 
+                    targetUser={prop.find((user:any) => user.username === atob(username!))}/>
                     
-                    <div className="pop-up-chat-image-send-container">
-                        <div className="fa-solid fa-image feed-hover"></div>
-                        <div className="feed-hover send-button">send</div>
-                    </div>
                 </div>
             </div>
 }

@@ -1,0 +1,9 @@
+.comment-outer-container{
+    padding: 1rem;
+    .each-comment-container{
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap:1rem;
+    }
+}

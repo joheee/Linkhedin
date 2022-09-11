@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { RichTextInterface } from "../../../../server/credential/Interface";
 import './RichTextRenderTemplates.scss'
 
@@ -11,13 +12,12 @@ export const RichTextRenderTemplates =({ content }: RichTextInterface)=> {
                 {words.map((word,i) => {
                     if(word.match(URL_REGEX)) {
                         
-                        return <a href={`//${word}`} target="_blank" key={i}>{word} </a>
+                        return <a href={`${word}`} target="_blank" key={i}>{word} </a>
                     } else if(word.match(MENTION_REGEX)) {
                         
                         return <a href={word} key={i}>{word} </a>
                     } else if(word.match(HASHTAG_REGEX)) {
-                        
-                        return <a href={word} key={i}>{word} </a>
+                        return <Link to={`/search/${word.replace('#','')}`} key={i}>{word} </Link>
                     } else return word + ' '
                 })}
             </p>

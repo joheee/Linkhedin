@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
@@ -10,6 +10,8 @@ import { InputTemplates } from '../../utils/InputTemplates'
 import './MyExperienceCard.scss'
 
 export const MyExperienceCard =(prop:any)=>{
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser.username
     const [popUpUpdate, setPopUpUpdate] = useState(false)
     const [pictureInput, setPictureInput] = useState(null)
     const [previewPictureInput, setPreviewPictureInput] = useState('')
@@ -19,7 +21,7 @@ export const MyExperienceCard =(prop:any)=>{
     const [updateCardExperience] = useMutation(UPDATE_CARD_EXPERIENCE)
     const [updatePhotoExperience] = useMutation(UPDATE_PICTURE_EXPERIENCE)
     const [deletePhotoExperience] = useMutation(DELETE_CARD_EXPERIENCE)
-    const {refetch,loading} = useQuery(GET_CURRENT_USER)
+    const {loading} = useSubscription(GET_CURRENT_USER)
 
     const handleExperienceImage =(e:any)=>{
         setPictureInput(e.target.files[0])
@@ -48,7 +50,6 @@ export const MyExperienceCard =(prop:any)=>{
                                 experienceImage:url!
                             }
                         }).then(()=>{
-                            refetch()
                             toast.success('success update ' + prop.experience)
                             setPopUpUpdate(!popUpUpdate)
                         })
@@ -69,7 +70,6 @@ export const MyExperienceCard =(prop:any)=>{
         }).then(()=>{
             toast.success('success delete ' + prop.experience)
             setPopUpUpdate(!popUpUpdate)
-            refetch()
 
         })
     }
@@ -111,6 +111,10 @@ export const MyExperienceCard =(prop:any)=>{
                         <div className="my-experience-card-external">{prop.location}</div>
                     </div>
                 </div>
-                <div className="fa-solid fa-pen feed-hover" onClick={()=>setPopUpUpdate(!popUpUpdate)}></div>
+                {
+                    prop.username === getUser.username ?
+                    <div className="fa-solid fa-pen feed-hover" onClick={()=>setPopUpUpdate(!popUpUpdate)}></div>
+                    : null
+                }
             </div>
 }

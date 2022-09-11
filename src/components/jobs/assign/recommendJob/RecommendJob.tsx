@@ -1,8 +1,8 @@
-import { dummyRecommendJob } from '../../../server/dummy/Data'
 import { BoxInnerTemplates } from '../../../utils/BoxInnerTemplates'
 import { RecommendJobCard } from '../../card/recommendJob/RecommendJobCard'
 import './RecommendJob.scss'
-export const RecommendJob =()=>{
+
+export const RecommendJob =({job}:any)=>{
 
     return  <BoxInnerTemplates>
                 <div className="recommend-job-container">
@@ -13,13 +13,15 @@ export const RecommendJob =()=>{
                         based on your profile and search history
                     </div>
                    
+                    <div className="recommend-job-card-very-outer-container">
                     {
-                        dummyRecommendJob.map((job,i) => (
-                            <div className="" key={i}>
-                                <RecommendJobCard {...job}/>
-                            </div>
-                        ))
-                    }
+                        job.map((job:any,i:any) => (
+                                <div className="" key={i}>
+                                    <RecommendJobCard {...job}/>
+                                </div>
+                                ))
+                            }
+                    </div>
                 </div>
             </BoxInnerTemplates>
 }

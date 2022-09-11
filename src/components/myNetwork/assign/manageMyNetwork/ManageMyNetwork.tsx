@@ -1,4 +1,6 @@
+import { useQuery, useSubscription } from "@apollo/client"
 import { useState } from "react"
+import { GET_ALL_CONNECT } from "../../../server/query/QueryList"
 import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates"
 import { ManageMyNetworkButtonTemplates } from "../../templates/manageMyNetwork/ManageMyNetworkButtonTemplates"
 import './ManageMyNetwork.scss'
@@ -6,6 +8,9 @@ import './ManageMyNetwork.scss'
 export const ManageMyNetwork =()=>{
     const dummyData = null
     const [isPopUp, setIsPopUp] = useState(false)
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
+    const getAllConnect = useSubscription(GET_ALL_CONNECT)
 
     return  <BoxInnerTemplates>
                     <div className="manage-my-network-container">
@@ -13,7 +18,11 @@ export const ManageMyNetwork =()=>{
                             manage my network
                         </div>
 
-                        <ManageMyNetworkButtonTemplates dummyData={dummyData} icon='fa-solid fa-user-group' text="connections" navigate="/connections"/>
+                        <ManageMyNetworkButtonTemplates dummyData={
+                            getAllConnect.loading === true ? null :
+                            getAllConnect.data.UserConnect.filter((user:any) => {
+                                return (user.senderConnect === getUser.username || user.receiverConnect === getUser.username) && user.isConnected === true}).length
+                        } icon='fa-solid fa-user-group' text="connections" navigate="/connections"/>
                         {isPopUp === true ? 
                             <div className="">
                                 <ManageMyNetworkButtonTemplates dummyData={dummyData} icon='fa-solid fa-circle-user' text="people | follow" navigate="/people"/>

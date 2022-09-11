@@ -28,5 +28,9 @@
     }
     .navbar-mobile{
         display: inline;
+        .fa-solid {
+            padding: .5rem;
+            border-radius: 50%;
+        }
     }
 } 

@@ -1,23 +1,19 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { dummyExperience } from '../../server/dummy/Data'
 import { storage } from '../../server/firebase/FirebaseHelper'
 import { CREATE_NEW_EDUCATION, CREATE_NEW_LICENSE, UPDATE_PICTURE_EDUCATION, UPDATE_PICTURE_LICENSE } from '../../server/mutation/MutationList'
-import { GET_CURRENT_USER } from '../../server/query/QueryList'
+import { GET_CURRENT_USER, GET_LOGIN_USER } from '../../server/query/QueryList'
 import { BoxInnerTemplates } from '../../utils/BoxInnerTemplates'
 import { InputTemplates } from '../../utils/InputTemplates'
+import { LoadingAnimation } from '../../utils/LoadingAnimation'
 import { MyLicensesCard } from '../card/MyLicensesCard'
 import './MyExperience.scss'
-export const MyLicenses =()=>{
+export const MyLicenses =({user}:any)=>{
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
-    const {loading,data,refetch} = useQuery(GET_CURRENT_USER,{
-        variables: {
-            username:getUser.username
-        },
-    })
     const [popUpCreate,setPopUpCreate] = useState(false)
     const [pictureInput, setPictureInput] = useState(null)
     const [previewPictureInput, setPreviewPictureInput] = useState('')
@@ -34,12 +30,12 @@ export const MyLicenses =()=>{
         if(pictureInput !== null && titleInput !== null && companyInput !== null) {
             createNewLicense({
                 variables:{
-                    username:data.User[0].username!,
+                    username:user.username!,
                     license:titleInput!,
                     institute:companyInput!,
                 }
             }).then((e)=>{
-                const userRef = ref(storage, `${data.User[0].username}/license/${e.data.insert_UserLicenses_one.license_id}`)
+                const userRef = ref(storage, `${user.username}/license/${e.data.insert_UserLicenses_one.license_id}`)
                 const metadata = {contentType : 'profile pic'}
                 uploadBytes(userRef, pictureInput, metadata)
                 .then(()=>{
@@ -50,7 +46,6 @@ export const MyLicenses =()=>{
                                 educationImage:url!
                             }
                         }).then(()=>{
-                            refetch()
                             toast.success('success create new license')
                             setPopUpCreate(!popUpCreate)
                         })
@@ -61,7 +56,6 @@ export const MyLicenses =()=>{
             toast.error('all field must be filled!')
         }
     }
-    if(loading) return <div className=""></div>
     return  <BoxInnerTemplates>
                 {
                     popUpCreate === false ? null :
@@ -71,7 +65,7 @@ export const MyLicenses =()=>{
                                 <div className="">new licenses</div>
                                 <div className="fa-solid fa-x feed-hover" onClick={()=>setPopUpCreate(!popUpCreate)}></div>
                             </div>
-                            <img src={previewPictureInput === '' ?'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II' : previewPictureInput}/>
+                            <img src={previewPictureInput === '' ? 'https://media-exp1.licdn.com/dms/image/C4D0BAQGISrtgx4-2Hg/company-logo_100_100/0/1603952174119?e=1669852800&v=beta&t=NUNoaOHZlxZfTjHsWTKiUYwPgWYLBIJMfG6JxBTI0II' : previewPictureInput}/>
                             <label className="file">
                                 <div className="fa-solid fa-camera feed-hover"></div>
                                 <input onChange={(e:any)=>handleExperienceImage(e)} type="file" id="file" aria-label="File browser example"/>
@@ -87,13 +81,17 @@ export const MyLicenses =()=>{
                     <div className="my-experience-header">
                         <div className="my-experience-text">licenses & certifications</div>
                         <div className="my-experience-header-button">
-                            <div className="fa-solid fa-plus feed-hover" onClick={()=>setPopUpCreate(!popUpCreate)}></div>
+                            {
+                                user.username === getUser.username ?
+                                <div className="fa-solid fa-plus feed-hover" onClick={()=>setPopUpCreate(!popUpCreate)}></div>
+                                : null
+                            }
                         </div>
                     </div>
                     <div className="my-experience-card-outer-container">
                         {
-                            data.User[0].UserLicenses.map((exp:any, i:any)=>
-                                <div className="" key={i}>
+                            user.UserLicenses.map((exp:any, i:any)=>
+                            <div className="" key={i}>
                                     <MyLicensesCard {...exp}/>
                                 </div>
                             )

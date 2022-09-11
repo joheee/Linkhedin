@@ -1,6 +1,17 @@
-.profile-page-core-container{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    max-width: 44rem;
+.home-page {
+    height:100vh;
+    .loading-animation-container {
+        height: 80%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .profile-page-core-container{
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 44rem;
+        margin-bottom: 1rem;
+    }
+    
 }

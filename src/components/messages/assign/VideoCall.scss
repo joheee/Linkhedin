@@ -1,0 +1,19 @@
+.video-call-container{
+    z-index: 20;
+    position: fixed;
+    background-color: tan;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    border-radius: .5rem;
+    .video {
+        display: grid;
+        gap: 1rem;
+        video {
+            border-radius: .5rem;
+        }
+    }
+} 

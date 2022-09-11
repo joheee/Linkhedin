@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/client"
+import { useQuery, useSubscription } from "@apollo/client"
 import { useParams } from "react-router-dom"
 import { FooterHome } from "../../footer/assign/home/FooterHome"
 import { FooterAttributeTemplates } from "../../footer/templates/FooterAttributeTemplates"
@@ -7,7 +7,7 @@ import { HomeContainerTemplates } from "../../home/templates/profileTemplates/Ho
 import { BoxCustomInnerTemplates } from "../../myNetwork/templates/BoxCustomInnerTemplates"
 import { NavbarHomeMobile } from "../../navigation/components/NavbarHomeMobile"
 import { dummyUser } from "../../server/dummy/Data"
-import { GET_CURRENT_USER, SEARCH_USER } from "../../server/query/QueryList"
+import { GET_ALL_POST, GET_CURRENT_USER, SEARCH_USER } from "../../server/query/QueryList"
 import { BackgroundManager, HandleBackground } from "../../utils/BackgroundManager"
 import { BoxInnerTemplates } from "../../utils/BoxInnerTemplates"
 import { BoxTemplates } from "../../utils/BoxTemplates"
@@ -19,34 +19,39 @@ export const SearchPage =()=> {
     const {keyword} = useParams()
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
-    const searchUser = useQuery(SEARCH_USER,{
+    const searchUser = useSubscription(SEARCH_USER,{
         variables:{
             username:keyword!,
             currentUser:getUser.username!
         }
     })
-    const filterPost = dummyUser.filter(f => f.posts.some(o => o.description.toLowerCase().includes(keyword!)))
+    const getAllPost = useSubscription(GET_ALL_POST)
+    if(!getAllPost.loading) console.log(getAllPost.data.User.filter((f:any) => f.Posts.some((o:any) => o.description.toLowerCase().includes(keyword!)))) 
 
-    if(searchUser.loading) return <div className=""></div>
     return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
                 <NavbarHomeMobile/>
                 
                     <HomeContainerTemplates>
 
-                        <BoxTemplates>
-                            <div className="post-container">
-                                {searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)}).length === 0 ? 
-                                    <BoxInnerTemplates>
-                                        <div className="search-keyword-container">
-                                            "{keyword}" is not found :)
-                                        </div>
-                                    </BoxInnerTemplates> :
-                                    <PeopleSearchTemplates prop={searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)})}/>
-                                }
-                                <PostFirstMapCard prop={filterPost}/>
-                                <LoadingAnimation height="50" width="100"/>
-                            </div>
-                        </BoxTemplates>
+                        {
+                            searchUser.loading === true || getAllPost.loading === true ?
+                            <LoadingAnimation height="50" width="100"/>
+                            :
+                            <BoxTemplates>
+                                <div className="post-container">
+                                    {searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)}).length === 0 ? 
+                                        <BoxInnerTemplates>
+                                            <div className="search-keyword-container">
+                                                "{keyword}" is not found in user :)
+                                            </div>
+                                        </BoxInnerTemplates> :
+                                        <PeopleSearchTemplates prop={searchUser.data.User.filter((el:any) => {return el.username.toLowerCase().includes(keyword!)})}/>
+                                    }
+                                    <PostFirstMapCard prop={getAllPost.data.User.filter((f:any) => f.Posts.some((o:any) => o.description.toLowerCase().includes(keyword!)))
+}/>
+                                </div>
+                            </BoxTemplates>
+                        }
 
                         <BoxCustomInnerTemplates>
                             <div className="responsive">

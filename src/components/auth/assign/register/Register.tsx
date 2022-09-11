@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation, useQuery, useSubscription } from "@apollo/client"
 import { useContext, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { LoginRegisterContext,AllUserContext } from "../../../server/credential/Context"
@@ -37,7 +37,7 @@ export const Register = () => {
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const navigate = useNavigate()
-    const { loading, error, data,refetch } = useQuery(GET_USER)
+    const { loading, error, data} = useSubscription(GET_USER)
     const [insert_User_one, {}] = useMutation(REGISTER_USER)
     const handleAuth = UserAuth()
 
@@ -69,16 +69,15 @@ export const Register = () => {
                         Password:newEmail
                     }
                 }).then(()=>{
-                    refetch().then(()=>{
-                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
-                        `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
-                        navigate(`auth/verification/${btoa(newEmail!)}`)
-                    })
+                    sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
+                    `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
+                    navigate(`auth/verification/${btoa(newEmail!)}`)
                 })
         })
     }    
     
     const handleRegister =()=>{
+        console.log('here')
         if(usernameInput === '' || emailInput === '' || passwordInput === '') {
             toast.error('all field must be filled')
             return
@@ -90,21 +89,21 @@ export const Register = () => {
                 } else if(item.username === usernameInput){
                     toast.error('username already used')
                     return
-                } else {
-                    insert_User_one({
-                        variables: {
-                            Username:usernameInput!,
-                            Email:emailInput!,
-                            Password:passwordInput!
-                        }
-                    }).then(()=>{
-                        sendEmail(  `http://localhost:5173/auth/verification/${btoa(item.email!)}/${btoa('true')}`,
-                            `https://linkhedin.vercel.app/auth/verification/${btoa(item.email!)}/${btoa('true')}`)
-                        navigate(`auth/verification/${btoa(emailInput!)}`)
-                    })
-                }
+                } 
             })
         }
+        insert_User_one({
+            variables: {
+                Username:usernameInput!,
+                Email:emailInput!,
+                Password:passwordInput!
+            }
+        }).then((e)=>{
+            console.log(e)
+            sendEmail(  `http://localhost:5173/auth/verification/${btoa(e.data.insert_User_one.email!)}/${btoa('true')}`,
+                `https://linkhedin.vercel.app/auth/verification/${btoa(e.data.insert_User_one.email!)}/${btoa('true')}`)
+            navigate(`auth/verification/${btoa(e.data.insert_User_one!)}`)
+        })
     }
 
     if(loading) return <LoadingAnimation height="50" width="100"/>

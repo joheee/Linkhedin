@@ -2,8 +2,7 @@ import { BoxInnerTemplates } from "../../../utils/BoxInnerTemplates"
 import { SuggestJobButtonTemplates } from "../../templates/suggestJob/SuggestJobButtonTemplates"
 import './SuggestJob.scss'
 
-export const SuggestJob =()=>{
-    const jobList = ['research group','money management','investor handal', 'web freelancer']
+export const SuggestJob =({job}:any)=>{
     return  <BoxInnerTemplates>
                 <div className="suggest-job-outer-container">
                     <div className="suggest-job-header-container">
@@ -12,9 +11,9 @@ export const SuggestJob =()=>{
 
                     <div className="suggest-job-container">
                         {
-                            jobList.map((job,i) => 
+                            job.slice(0,4).map((item:any,i:any) => 
                                 <div key={i}>
-                                    <SuggestJobButtonTemplates text={job} navigate={`job/${job}`}/>
+                                    <SuggestJobButtonTemplates job={item}/>
                                 </div>
                             )
                         }

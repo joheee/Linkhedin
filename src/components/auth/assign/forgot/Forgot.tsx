@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation, useQuery, useSubscription } from "@apollo/client"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import { Link, useNavigate } from "react-router-dom"
@@ -15,7 +15,7 @@ import { sendEmail } from "../register/Register"
 export const Forgot=()=>{
     const navigate = useNavigate()
     const [emailInput, setEmailInput] = useState('')
-    const {loading,error,data} = useQuery(GET_USER)
+    const {loading,error,data} = useSubscription(GET_USER)
 
     const handleResetPassword =()=>{
         if(emailInput!==''){

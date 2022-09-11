@@ -3,7 +3,7 @@ import { HeaderTemplates } from "../../../utils/HeaderTemplates"
 import { AuthTemplates } from "../../templates/AuthTemplates"
 import toast from 'react-hot-toast';
 import { UPDATE_USER_BY_PK_VERIFICATION } from "../../../server/mutation/MutationList"
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation, useQuery, useSubscription } from "@apollo/client"
 import { GET_USER } from "../../../server/query/QueryList"
 
 export const Verification =()=>{
@@ -11,9 +11,8 @@ export const Verification =()=>{
     const {email} = useParams()
     const {isVerif} = useParams()
     const getUser = (atob(email!))
-    const [update_user_by_pk, prop] = useMutation(UPDATE_USER_BY_PK_VERIFICATION)
-    const { loading, error, data,refetch } = useQuery(GET_USER)
-    refetch()
+    const [update_user_by_pk] = useMutation(UPDATE_USER_BY_PK_VERIFICATION)
+    const { loading, data } = useSubscription(GET_USER)
 
     if(isVerif !== undefined) {
         const getVerif = atob(isVerif!)
@@ -28,15 +27,13 @@ export const Verification =()=>{
                     })
                     .then(()=>{
                         localStorage.setItem('current_login', JSON.stringify({user_id:item.user_id, username:item.username,email:item.email,password:item.password}))
-                        refetch().then(()=>{
-                            toast(
-                                `welcome ${item.username}`,
-                                {
-                                    duration: 3000,
-                                }
-                                )
-                                navigate('/home')
-                            })
+                        toast(
+                            `welcome ${item.username}`,
+                            {
+                                duration: 3000,
+                            }
+                            )
+                            navigate('/home')
                         })
                     }
                 })

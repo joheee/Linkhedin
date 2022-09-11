@@ -1,26 +1,41 @@
-import { useMutation, useQuery } from "@apollo/client";
+import { useMutation } from "@apollo/client";
 import toast from "react-hot-toast";
 import { RecommendPersonTemplates } from "../../home/templates/feedTemplates/RecommendPersonTemplates";
-import { PropRecommendCardInterface } from "../../server/credential/Interface";
-import { CONNECT_ACCEPT, CONNECT_REJECT } from "../../server/mutation/MutationList";
-import { GET_LOGIN_USER, GET_REQUEST_CONNECT } from "../../server/query/QueryList";
+import { CONNECT_ACCEPT, CONNECT_REJECT, CREATE_CHAT_ROOM, FOLLOW_MECHANISM } from "../../server/mutation/MutationList";
 import './InvitationUserCard.scss'
 
 export const InvitationUserCard =({prop}:any)=>{
-    const getRequest = useQuery(GET_REQUEST_CONNECT, {
-        variables:{
-            username:prop.receiverConnect!
-        }
-    })
     const [acceptConnect] = useMutation(CONNECT_ACCEPT)
+    const [handleFollow] = useMutation(FOLLOW_MECHANISM)
+    const [createChatRoom] = useMutation(CREATE_CHAT_ROOM)
     const handleAccept =()=>{
         acceptConnect({
             variables:{
                 connect_id:prop.connect_id!
             }
         }).then(()=>{
-            toast.success('accept ' + prop.senderConnect)
-            getRequest.refetch()
+            handleFollow({
+                variables:{
+                    sender:prop.receiverConnect,
+                    target:prop.senderConnect
+                }
+            }).then(()=>{
+                handleFollow({
+                    variables:{
+                        target:prop.receiverConnect,
+                        sender:prop.senderConnect
+                    }
+                }).then(()=>{
+                    createChatRoom({
+                        variables:{
+                            sender:prop.senderConnect,
+                            receiver:prop.receiverConnect
+                        }
+                    }).then(()=>{
+                        toast.success('accept ' + prop.senderConnect)
+                    })
+                })
+            })
         })
     }
 
@@ -32,12 +47,11 @@ export const InvitationUserCard =({prop}:any)=>{
             }
         }).then(()=>{
             toast.success('reject ' + prop.senderConnect)
-            getRequest.refetch()
         })
     }
     return  <div className="invitation-user-card-container">
                 <div className="invitation-user-card-info-user-container">
-                    <RecommendPersonTemplates username={prop.senderConnect}/>
+                    <RecommendPersonTemplates {...prop.User}/>
                 </div>
                 <div className="invitation-user-card-ignore-accept-container">
                     <div className="ignore-button-effect" onClick={()=>handleReject()}>ignore</div>

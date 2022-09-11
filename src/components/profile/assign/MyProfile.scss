@@ -129,6 +129,7 @@
         img {
             width: 100%;
             height:100%;
+            border-radius: .5rem .5rem 0 0;
         }
         .my-profile-picture {
             cursor: pointer;
@@ -150,6 +151,9 @@
     .my-profile-info-container{
         padding: 2rem 1rem 1rem;
         font-size: 1rem;
+        .set-margin {
+            margin-top: 1rem;
+        }
         .my-profile-full-name {
             font-size: 1.4rem;
             font-weight: bold;
@@ -190,11 +194,12 @@
             }
         }
         .my-profile-logout{
-            margin-top: 3rem;
+            margin-top: 1rem;
             max-width:fit-content;
         }
     }
 }
+
 
 @media screen and (min-width:850px) {
     .my-profile-parent-container {

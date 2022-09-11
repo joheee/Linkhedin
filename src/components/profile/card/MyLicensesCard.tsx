@@ -1,4 +1,4 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useSubscription } from '@apollo/client'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
@@ -8,7 +8,10 @@ import { DELETE_CARD_EDUCATION, DELETE_CARD_LICENSE, UPDATE_CARD_EDUCATION, UPDA
 import { GET_CURRENT_USER } from '../../server/query/QueryList'
 import { InputTemplates } from '../../utils/InputTemplates'
 import './MyExperienceCard.scss'
+
 export const MyLicensesCard =(prop:any)=>{
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
     const [popUpUpdate, setPopUpUpdate] = useState(false)
     const [pictureInput, setPictureInput] = useState(null)
     const [previewPictureInput, setPreviewPictureInput] = useState('')
@@ -17,7 +20,7 @@ export const MyLicensesCard =(prop:any)=>{
     const [updateCardeducation] = useMutation(UPDATE_CARD_LICENSE)
     const [updatePhotoeducation] = useMutation(UPDATE_PICTURE_LICENSE)
     const [deletePhotoeducation] = useMutation(DELETE_CARD_LICENSE)
-    const {refetch,loading} = useQuery(GET_CURRENT_USER)
+    const {loading} = useSubscription(GET_CURRENT_USER)
 
     const handleeducationImage =(e:any)=>{
         setPictureInput(e.target.files[0])
@@ -43,7 +46,6 @@ export const MyLicensesCard =(prop:any)=>{
                                 educationImage:url!
                             }
                         }).then(()=>{
-                            refetch()
                             toast.success('success update ' + prop.license)
                             setPopUpUpdate(!popUpUpdate)
                         })
@@ -63,8 +65,6 @@ export const MyLicensesCard =(prop:any)=>{
         }).then(()=>{
             toast.success('success delete ' + prop.license)
             setPopUpUpdate(!popUpUpdate)
-            refetch()
-
         })
     }
     return  <div className="my-experience-card-container">
@@ -100,7 +100,11 @@ export const MyLicensesCard =(prop:any)=>{
                         <div className="my-experience-card-external">{new Date(prop.createdAt!).toDateString()}</div>
                     </div>
                 </div>
-                <div className="fa-solid fa-pen feed-hover" onClick={()=>setPopUpUpdate(!popUpUpdate)}></div>
+                {
+                    prop.username === getUser.username ?
+                    <div className="fa-solid fa-pen feed-hover" onClick={()=>setPopUpUpdate(!popUpUpdate)}></div>
+                    : null
+                }
 
             </div>
 }

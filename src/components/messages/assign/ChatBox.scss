@@ -1,10 +1,15 @@
+p {
+    margin: 0;
+    padding: .5rem;
+}
+
 .chat-box-container {
     height: 30rem;
     overflow-x: hidden;
     overflow-y: auto;
     display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    flex-direction: column-reverse;
+    gap: 3rem;
     padding: 0 1rem;
     .chat-bubble-sender, .chat-bubble-receiver {
         display: flex;
@@ -14,26 +19,51 @@
             height: 2rem;
             img {
                 width: 2rem;
+                height: 2rem;
+                border-radius: 50%;
             }
+        }
+        .chat-box-message-inner-sender-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: .5rem
+        }
+        .chat-box-message-inner-receiver-container {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: .5rem
         }
     }
     .chat-bubble-sender {
         .chat-bubble-inner-sender {
             background-color: var(--accentColor);
             color: white;
-            padding: .5rem;
             border-radius: .5rem;
             margin-right: 6rem;
+            width: fit-content;
+            height: fit-content;
+            img {
+                max-width: 13rem;
+                height: 100%;
+                border-radius: .5rem;
+            }
         }
     }
     .chat-bubble-receiver {
         flex-direction: row-reverse;
         .chat-bubble-inner-receiver {
             background-color: tan;
-            padding: .5rem;
             border-radius: .5rem;
             margin-left: 6rem;
-
+            width: fit-content;
+            height: fit-content;
+            img {
+                max-width: 13rem;
+                height: 100%;
+                border-radius: .5rem;
+            }
         }
     }
 }

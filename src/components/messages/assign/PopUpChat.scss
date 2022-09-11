@@ -57,11 +57,49 @@
             padding: .5rem 1rem;
             border-radius: .5rem;
         }
+        .file {
+            .fa-solid {
+                padding: .5rem;
+                border-radius: 50%;
+            }
+            input {
+                background-color: var(--primaryColor);
+                display: none;
+            }            
+        }
     }
 }
 @media screen and (max-width: 750px) {
     .pop-up-chat-container {
         width: 100%;
         height: 100%;
+    }
+}
+
+.rich-text-templates-container {
+    .rich-text-templates-image {
+        max-width: 10rem;
+        background-color: tan; 
+        padding: .5rem;
+        border-radius: .5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        font-weight: bold;
+        img {
+            width: 100%;
+            border-radius: .5rem;
+        }
+        .rich-text-templates-image-header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            width: 100%;
+            .fa-solid {
+                padding: .5rem;
+                border-radius: 50%;
+            }
+        }
     }
 }

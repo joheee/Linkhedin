@@ -1,5 +1,5 @@
 import { ApolloProvider } from '@apollo/client'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { AuthPage } from './components/auth/page/AuthPage'
 import { ForgotPage } from './components/auth/page/ForgotPage'
@@ -17,6 +17,9 @@ import { GetClient } from './components/server/graphql/Client'
 import { AuthContextProvider } from './components/utils/AuthContextProvider'
 import { HandleBackground } from './components/utils/BackgroundManager'
 import { Toaster } from 'react-hot-toast';
+import { OthersPage } from './components/others/page/OthersPage'
+import { PostDetailPage } from './components/postDetail/page/PostDetailPage'
+import { RefreshProfile } from './components/refresh/RefreshProfile'
 
 function App() {
   useEffect(()=>{
@@ -30,9 +33,13 @@ function App() {
           document.body.style.background = HandleBackground('--secondaryColor')
       }
     }
- 
   },[])
-  return  <ApolloProvider client={GetClient()}>
+
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+      getUser === null ? "":getUser
+
+
+    return  <ApolloProvider client={GetClient()}>
             <AuthContextProvider>
               <div><Toaster position="top-left" reverseOrder={false}/></div>
               <BrowserRouter>
@@ -51,10 +58,13 @@ function App() {
                   <Route path="/jobs" element={<JobPage/>}/>
                   <Route path="/notifications" element={<NotificationPage/>}/>
 
-                  <Route path="/messages/:messageIndex" element={<MessagesPage/>}/>
+                  <Route path="/messages/:messageIndex/:username" element={<MessagesPage/>}/>
                   <Route path="/messages/" element={<MessagesPage/>}/>
                   <Route path="/myprofile/" element={<ProfilePage/>}/>
+                  <Route path="/others/:username" element={<OthersPage/>}/>
+                  <Route path="/post-detail/:post_id" element={<PostDetailPage/>}/>
 
+                  <Route path="/refresh/profile" element={<RefreshProfile/>}/>
                 </Routes>
               </BrowserRouter>
             </AuthContextProvider>

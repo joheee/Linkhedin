@@ -12,7 +12,7 @@ import { UserAuth } from "../../../utils/AuthContextProvider"
 import { Auth } from "../../../server/firebase/FirebaseHelper"
 import { onAuthStateChanged } from 'firebase/auth'
 import toast from 'react-hot-toast';
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation, useQuery, useSubscription } from "@apollo/client"
 import { GET_USER } from "../../../server/query/QueryList"
 import { LoadingAnimation } from "../../../utils/LoadingAnimation"
 import { sendEmail } from "../register/Register"
@@ -24,7 +24,7 @@ export const Login = () => {
     const [passInput, setPassInput] = useState('')
     const navigate = useNavigate()
     const handleAuth = UserAuth()
-    const { loading, error, data,refetch } = useQuery(GET_USER)
+    const { loading, error, data } = useSubscription(GET_USER)
     const [insert_User_one, {}] = useMutation(REGISTER_USER)
     
     const handleGoogleSignIn =()=>{
@@ -55,11 +55,9 @@ export const Login = () => {
                     Password:newEmail
                 }
             }).then(()=>{
-                refetch().then(()=>{
-                    sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
-                    `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
-                    navigate(`auth/verification/${btoa(newEmail!)}`)
-                })
+                sendEmail(  `http://localhost:5173/auth/verification/${btoa(newEmail!)}/${btoa('true')}`,
+                `https://linkhedin.vercel.app/auth/verification/${btoa(newEmail!)}/${btoa('true')}`)
+                navigate(`auth/verification/${btoa(newEmail!)}`)
             })
       })
   }     

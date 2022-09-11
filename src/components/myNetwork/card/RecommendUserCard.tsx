@@ -1,4 +1,5 @@
-import { useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery, useSubscription } from '@apollo/client'
+import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { NameDescTemplates } from '../../home/templates/profileTemplates/NameDescTemplates'
 import { ProfileBackgroundTemplates } from '../../home/templates/profileTemplates/ProfileBackgroundTemplates'
@@ -11,7 +12,6 @@ export const RecommendUserCard =(prop:any)=>{
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
     const [connectUser] = useMutation(CONNECT_MECHANISM)
-    const {refetch} = useQuery(GET_ALL_CONNECT)
     
     const handleConnect =()=>{
         connectUser({
@@ -21,7 +21,6 @@ export const RecommendUserCard =(prop:any)=>{
             }
         }).then(()=>{
             toast.success('send connect request to ' + prop.username)
-            refetch()
         })
     }
 

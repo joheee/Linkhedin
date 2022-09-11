@@ -1,0 +1,11 @@
+.post-detail-page-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90%;
+    .post-detail-component {
+        background-color: var(--primaryColor);
+        border-radius: .5rem;
+        max-width: 35rem;
+    }
+}

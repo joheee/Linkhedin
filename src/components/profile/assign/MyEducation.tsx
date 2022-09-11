@@ -1,23 +1,18 @@
-import { useMutation, useQuery } from "@apollo/client"
+import { useMutation, useSubscription } from "@apollo/client"
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage"
 import { useState } from "react"
 import toast from "react-hot-toast"
-import { dummyExperience } from "../../server/dummy/Data"
 import { storage } from "../../server/firebase/FirebaseHelper"
-import { CREATE_NEW_EDUCATION, CREATE_NEW_EXPERIENCE, UPDATE_PICTURE_EDUCATION, UPDATE_PICTURE_EXPERIENCE } from "../../server/mutation/MutationList"
-import { GET_CURRENT_USER } from "../../server/query/QueryList"
+import { CREATE_NEW_EDUCATION, UPDATE_PICTURE_EDUCATION } from "../../server/mutation/MutationList"
+import { GET_LOGIN_USER } from "../../server/query/QueryList"
 import { BoxInnerTemplates } from "../../utils/BoxInnerTemplates"
 import { InputTemplates } from "../../utils/InputTemplates"
+import { LoadingAnimation } from "../../utils/LoadingAnimation"
 import { MyEducationCard } from "../card/MyEducationCard"
 import './MyEducation.scss'
-export const MyEducation =()=>{
+export const MyEducation =({user}:any)=>{
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
-    const {loading,data,refetch} = useQuery(GET_CURRENT_USER,{
-        variables: {
-            username:getUser.username
-        },
-    })
     const [popUpCreate,setPopUpCreate] = useState(false)
     const [pictureInput, setPictureInput] = useState(null)
     const [previewPictureInput, setPreviewPictureInput] = useState('')
@@ -31,17 +26,17 @@ export const MyEducation =()=>{
         setPictureInput(e.target.files[0])
         setPreviewPictureInput(URL.createObjectURL(e.target.files[0]))
     }
-    const handleCreateExperience =()=>{
+    const   handleCreateExperience =()=>{
         if(pictureInput !== null && titleInput !== null && companyInput !== null && locationInput !== null) {
             createNewEducation({
                 variables:{
-                    username:data.User[0].username!,
+                    username:user.username!,
                     education:titleInput!,
                     institute:companyInput!,
                     location:locationInput!,
                 }
             }).then((e)=>{
-                const userRef = ref(storage, `${data.User[0].username}/education/${e.data.insert_UserEducation_one.education_id}`)
+                const userRef = ref(storage, `${user.username}/education/${e.data.insert_UserEducation_one.education_id}`)
                 const metadata = {contentType : 'profile pic'}
                 uploadBytes(userRef, pictureInput, metadata)
                 .then(()=>{
@@ -52,7 +47,6 @@ export const MyEducation =()=>{
                                 educationImage:url!
                             }
                         }).then(()=>{
-                            refetch()
                             toast.success('success create new education')
                             setPopUpCreate(!popUpCreate)
                         })
@@ -63,7 +57,6 @@ export const MyEducation =()=>{
             toast.error('all field must be filled!')
         }
     }
-    if(loading) return <div className=""></div>
     return  <BoxInnerTemplates>
                 {
                     popUpCreate === false ? null :
@@ -89,13 +82,17 @@ export const MyEducation =()=>{
                     <div className="my-experience-header">
                         <div className="my-experience-text">education</div>
                         <div className="my-experience-header-button">
-                            <div className="fa-solid fa-plus feed-hover" onClick={()=>setPopUpCreate(!popUpCreate)}></div>
+                            {
+                                user.username === getUser.username ?
+                                <div className="fa-solid fa-plus feed-hover" onClick={()=>setPopUpCreate(!popUpCreate)}></div>
+                                : null
+                            }   
                         </div>
                     </div>
                     <div className="my-experience-card-outer-container">
                         {
-                            data.User[0].UserEducations.map((exp:any, i:any)=>
-                                <div className="" key={i}>
+                            user.UserEducations.map((exp:any, i:any)=>
+                            <div className="" key={i}>
                                     <MyEducationCard {...exp}/>
                                 </div>
                             )

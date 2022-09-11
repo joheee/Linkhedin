@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SearchPopUpOutlineTemplates } from '../../search/templates/popUp/SearchPopUpOutlineTemplates'
 import './NavbarSearchTemplates.scss'
 import { useNavigate, useParams } from 'react-router-dom'
-import { useQuery } from '@apollo/client'
+import { useQuery, useSubscription } from '@apollo/client'
 import { GET_OTHER_USER } from '../../server/query/QueryList'
 
 
@@ -14,7 +14,7 @@ export const NavbarSearchTemplates =({...attr}:any)=>{
     const {keyword} = useParams()
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
-    const {loading,data,refetch} = useQuery(GET_OTHER_USER,{
+    const {loading,data} = useSubscription(GET_OTHER_USER,{
         variables: {
             username:getUser.username
         },
@@ -34,13 +34,10 @@ export const NavbarSearchTemplates =({...attr}:any)=>{
         } 
 
     }
-    useEffect(()=>{
-        refetch()
-    },[isPopUp])
     useEffect(() => {
         if(searchInput !== '') setIsPopUp(true)
         else setIsPopUp(false)
-      },[searchInput])
+    },[searchInput])
     
     if(loading) return <div className=""></div>
     return  <div className="navbar-search-templates-container">
