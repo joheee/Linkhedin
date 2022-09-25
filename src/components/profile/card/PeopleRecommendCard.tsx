@@ -2,7 +2,7 @@ import { useMutation, useSubscription } from "@apollo/client";
 import { RecommendPersonTemplates } from "../../home/templates/feedTemplates/RecommendPersonTemplates";
 import './PeopleRecommendCard.scss'
 import { GET_ALL_CONNECT } from '../../server/query/QueryList'
-import { CONNECT_MECHANISM } from "../../server/mutation/MutationList";
+import { CONNECT_MECHANISM, CREATE_CHAT_ROOM } from "../../server/mutation/MutationList";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
@@ -22,7 +22,15 @@ export const PeopleRecommendCard =(prop:any)=>{
             toast.success('send connect request to ' + prop.username)
         })
     }
-
+    const [createChatRoom] = useMutation(CREATE_CHAT_ROOM)
+    const handleMessageOther =()=>{
+        createChatRoom({
+            variables:{
+                sender:getUser.username,
+                receiver:prop.username
+            }
+        }).then(()=>navigate('/messages'))
+    }
     // if(!getAllConnect.loading) {
     //     console.log(getAllConnect.data.UserConnect.find((user:any) => (user.receiverConnect === prop.username && user.senderConnect === getUser.username || user.senderConnect === prop.username && user.receiverConnect === getUser.username)))
     // }
@@ -31,7 +39,7 @@ export const PeopleRecommendCard =(prop:any)=>{
                 <RecommendPersonTemplates {...prop}/>
                 {
                     getAllConnect.data.UserConnect.find((user:any) => (user.receiverConnect === prop.username && user.senderConnect === getUser.username || user.senderConnect === prop.username && user.receiverConnect === getUser.username)) !== undefined ?
-                                <div className="people-recommend-card-message-connect-button" onClick={()=> navigate('/messages')}>message</div> : 
+                                <div className="people-recommend-card-message-connect-button" onClick={()=> handleMessageOther()}>message</div> : 
                                 <div className="follow-button-effect con"
                         onClick={()=>handleConnect()}
                     >connect</div>

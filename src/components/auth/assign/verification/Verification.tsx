@@ -42,7 +42,13 @@ export const Verification =()=>{
     }
 
     return  <AuthTemplates>
-                <HeaderTemplates text='verified our account' style={{fontSize:"2rem"}}/>
-                <HeaderTemplates text='check your email' style={{fontSize:"1.5rem"}}/>
+                {
+                    isVerif === undefined ?  
+                    <>
+                        <HeaderTemplates text='verified our account' style={{fontSize:"2rem"}}/>
+                        <HeaderTemplates text='check your email' style={{fontSize:"1.5rem"}}/>
+                    </> :
+                        <HeaderTemplates text='redirect to homepage' style={{fontSize:"2rem"}}/>
+                }
             </AuthTemplates>
 }

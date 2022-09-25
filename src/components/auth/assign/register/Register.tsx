@@ -37,7 +37,7 @@ export const Register = () => {
     const [emailInput, setEmailInput] = useState('')
     const [passwordInput, setPasswordInput] = useState('')
     const navigate = useNavigate()
-    const { loading, error, data} = useSubscription(GET_USER)
+    const { loading, data} = useSubscription(GET_USER)
     const [insert_User_one, {}] = useMutation(REGISTER_USER)
     const handleAuth = UserAuth()
 
@@ -77,7 +77,6 @@ export const Register = () => {
     }    
     
     const handleRegister =()=>{
-        console.log('here')
         if(usernameInput === '' || emailInput === '' || passwordInput === '') {
             toast.error('all field must be filled')
             return
@@ -99,7 +98,6 @@ export const Register = () => {
                 Password:passwordInput!
             }
         }).then((e)=>{
-            console.log(e)
             sendEmail(  `http://localhost:5173/auth/verification/${btoa(e.data.insert_User_one.email!)}/${btoa('true')}`,
                 `https://linkhedin.vercel.app/auth/verification/${btoa(e.data.insert_User_one.email!)}/${btoa('true')}`)
             navigate(`auth/verification/${btoa(e.data.insert_User_one!)}`)

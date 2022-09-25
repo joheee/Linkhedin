@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { LoginRegisterContext } from "../../server/credential/Context"
 import { useGoogleLoginCustom } from "../../hooks/useGoogleLoginCustom"
 import { Login } from "../assign/login/Login"
@@ -8,6 +8,7 @@ import { AuthMiddleTemplates } from "../templates/AuthMiddleTemplates"
 import { NavbarTemplates } from "../../navigation/templates/NavbarTemplates"
 import { FooterAuth } from "../../footer/assign/FooterAuth"
 import { BackgroundManager, HandleBackground } from "../../utils/BackgroundManager"
+import { useNavigate } from "react-router-dom"
 
 export const AuthPage = () => {
     const [isLogin, setIsLogin] = useState(true)

@@ -4,4 +4,13 @@
     justify-content: center;
     gap: 1rem;
     margin: .8rem;
+    overflow: hidden;
+}
+
+@media screen and (max-width:850px){
+    #home-container-templates-component{
+        width: 100vw;
+        margin: .8rem 0 0 0;
+        border-radius: 0;
+    }
 }

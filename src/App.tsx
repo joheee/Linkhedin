@@ -35,20 +35,14 @@ function App() {
     }
   },[])
 
-    const getUser = JSON.parse(localStorage.getItem('current_login')!)
-      getUser === null ? "":getUser
-
-
-    return  <ApolloProvider client={GetClient()}>
-            <AuthContextProvider>
-              <div><Toaster position="top-left" reverseOrder={false}/></div>
-              <BrowserRouter>
+  return  <ApolloProvider client={GetClient()}>
+            <div><Toaster position="top-left" reverseOrder={false}/></div>
+            <BrowserRouter>
+              <AuthContextProvider>
                 <Routes>
-
                   <Route path="/" element={<AuthPage/>}/>
                   <Route path="/auth/reset-password" element={<ForgotPage/>}/>
                   <Route path="/auth/reset-password/new-password/:user_id" element={<ResetPassPage/>}/>
-                  
                   <Route path="/auth/verification/:email/:isVerif" element={<VerificationPage/>}/>
                   <Route path="/auth/verification/:email/" element={<VerificationPage/>}/>
 
@@ -66,9 +60,9 @@ function App() {
 
                   <Route path="/refresh/profile" element={<RefreshProfile/>}/>
                 </Routes>
-              </BrowserRouter>
-            </AuthContextProvider>
-          </ApolloProvider>
+              </AuthContextProvider>
+            </BrowserRouter>
+        </ApolloProvider>
 }
 
 export default App

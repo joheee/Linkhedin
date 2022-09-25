@@ -7,8 +7,10 @@ export const Comment =({comment}:any)=>{
         <CommentInputTemplates comment={comment}/>
         <div className="each-comment-container">
         {
-            comment.PostComments.map((item:any) => {
-                return <CommentRenderTemplates comment={item}/>
+            comment.PostComments.map((item:any, i:any) => {
+                return  <div key={i}>
+                            <CommentRenderTemplates comment={item} reply_id={null}/>
+                        </div>
             })
         }
         </div>

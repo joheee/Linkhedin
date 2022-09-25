@@ -4,11 +4,11 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap-reverse;
-
+    gap: 1rem;
     img {
         height: 15px;
     }
-    p:hover {
+    a:hover {
         text-decoration: underline;
         cursor: pointer;
     }

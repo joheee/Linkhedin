@@ -8,6 +8,9 @@ import { ViewAllTemplates } from "../../templates/feedTemplates/ViewAllTemplates
 
 import './Feed.scss'
 export const Feed =()=>{
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
+    
     return  <BoxTemplates>
                 <div className="feed-outer-container">
                     <div className="responsive">

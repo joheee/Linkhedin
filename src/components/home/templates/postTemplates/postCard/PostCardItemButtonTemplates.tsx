@@ -11,7 +11,6 @@ export const PostCardItemButtonTemplates =(post:any)=>{
 
     const [deletePost] = useMutation(DELETE_POST)
     const handleDelete =()=>{
-        console.log("here")
         deletePost({
             variables:{
                 post_id:post.post_id!
@@ -56,7 +55,6 @@ export const PostCardItemButtonTemplates =(post:any)=>{
 
     const CommentContext = useContext(CommentPopUpContext!)
     const queryString = window.location.search;
-    console.log(queryString);
 
     return  <div className="post-card-item-button-container">
                 <div className={`post-card-item-button-each feed-hover ${

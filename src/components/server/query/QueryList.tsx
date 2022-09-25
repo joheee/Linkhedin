@@ -338,6 +338,22 @@ subscription GetCurrentFollow($target:String!) {
   }
 }
 `
+export const GET_FOLLOW_ACCOUNT_POST = gql 
+`
+subscription GetCurrentFollow($send:String!) {
+  UserFollower(where:{sendFollow:{_like:$send}}) {
+    follower_id
+    sendFollow
+    targetFollow
+    createdAt
+    User{
+      username
+      email
+      user_id
+    }
+  }
+}
+`
 
 export const GET_ALL_JOB = gql 
 `
@@ -550,5 +566,153 @@ subscription GetCurrentPost($post_id:uuid!){
         }
       }
     }
+}
+`
+
+export const GET_POST_NOTIFICATION = gql
+`
+subscription GetPostNotification($username:String!) {
+  PostCreateNotification(where:{username:{_like:$username}}) {
+    post_create_id
+    post_id
+    username
+    User {
+      user_id
+      username
+      email
+      password
+      UserDetail {
+        about
+        description
+        photoBanner
+        photoProfile
+        username
+      }
+    }
+  }
+}
+`
+
+export const GET_FOLLOWER_NOTIFICATION = gql
+`
+subscription UserFollowerNotification($username:String!){
+  UserFollowerNotification(where:{targetFollow:{_like:$username}}) {
+    user_follower_notification_id
+    follower_id
+    targetFollow
+    sendFollow
+    User {
+      user_id
+      username
+      email
+      password
+      UserDetail {
+        about
+        description
+        photoBanner
+        photoProfile
+        username
+      }
+    }
+  }
+}
+`
+
+export const GET_VISITOR_VALIDATION = gql
+`
+subscription TakeVisitor($target:String!, $visitor:String!) {
+  UserVisitor(where:{target:{_like:$target},visitor:{_like:$visitor}}){
+    target
+    user_visitor_id
+    visitor
+    User {
+      user_id
+      username
+      email
+      password
+      UserDetail {
+        about
+        description
+        photoBanner
+        photoProfile
+        username
+      }
+    }
+  }
+}
+`
+
+export const GET_TOTAL_VISITOR = gql
+`
+subscription GetTotalVisitor($target:String!){
+	UserVisitor(where:{target:{_like:$target}}){
+    target
+    user_visitor_id
+    visitor
+     User{
+          user_id
+          username
+          email
+          password
+          verification
+          UserDetail {
+            photoProfile
+            photoBanner
+            description
+            about
+            username
+          }
+        }
+  }
+}
+`
+
+export const GET_COMMENT_LIKE = gql
+`
+subscription GetLikeComment($comment_id:uuid!){
+  PostCommentLike(where:{comment_id:{_eq:$comment_id}}) {
+    post_comment_like_id
+    comment_id
+    likedBy
+  }
+}
+`
+
+export const GET_POST_COMMMENT_EXIST = gql
+`
+subscription GetCommentLike($comment_id:uuid!, $username:String!) {
+  PostCommentLike(where:{comment_id:{_eq:$comment_id},likedBy:{_eq:$username}}) {
+    likedBy
+    comment_id
+    post_comment_like_id
+  }
+}
+`
+
+export const GET_REPLY_COMMENT =  gql
+`
+subscription GetCommentReplies($reply_id:uuid!){
+  PostComment(where:{reply_id:{_eq:$reply_id}}){
+      comment_id
+      reply_id
+      post_id
+      username
+      message
+      createdAt
+      User{
+        user_id
+        username
+        email
+        password
+        verification
+        UserDetail {
+          photoProfile
+          photoBanner
+          description
+          about
+          username
+      }
+    }
+  }
 }
 `

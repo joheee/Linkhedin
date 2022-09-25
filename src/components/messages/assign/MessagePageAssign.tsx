@@ -38,12 +38,7 @@ export const MessagePageAssign =()=>{
         setSearchInput(lowerCase)
     }
 
-   
-                
     return  <BoxTemplates>
-    
-
-
                 <BoxInnerTemplates>
                         <div className="message-page-assign-header-search-people-container">
                             <div className="message-page-assign-container">

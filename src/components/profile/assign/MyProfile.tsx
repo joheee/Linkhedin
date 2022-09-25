@@ -1,11 +1,11 @@
-import { useMutation, useSubscription } from '@apollo/client'
+    import { useMutation, useSubscription } from '@apollo/client'
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { storage } from '../../server/firebase/FirebaseHelper'
-import { CONNECT_MECHANISM, UPDATE_USER_BY_PK_NEW_DESCRIPTION, UPDATE_USER_BY_PK_NEW_PHOTO_BANNER, UPDATE_USER_BY_PK_NEW_PHOTO_PROFILE, UPDATE_USER_BY_PK_NEW_USERNAME } from '../../server/mutation/MutationList'
-import { GET_ALL_CONNECT, GET_OTHER_USER, GET_TOTAL_FOLLOW, GET_USER } from '../../server/query/QueryList'
+import { CONNECT_MECHANISM, CREATE_CHAT_ROOM, UPDATE_USER_BY_PK_NEW_DESCRIPTION, UPDATE_USER_BY_PK_NEW_PHOTO_BANNER, UPDATE_USER_BY_PK_NEW_PHOTO_PROFILE, UPDATE_USER_BY_PK_NEW_USERNAME } from '../../server/mutation/MutationList'
+import { GET_ALL_CONNECT, GET_OTHER_USER, GET_TOTAL_FOLLOW, GET_TOTAL_VISITOR, GET_USER } from '../../server/query/QueryList'
 import { BoxInnerTemplates } from '../../utils/BoxInnerTemplates'
 import './MyProfile.scss'
 
@@ -36,9 +36,8 @@ export const MyProfile =({user}:any)=>{
 
     const [customProfile,setCustomProfile] = useState(false)
     const [usernameInput,setUsernameInput] = useState('')
-    const [descInput,setDescInput] = useState('')
     const handleSave =()=>{
-        if(usernameInput === '' && descInput === '') {
+        if(usernameInput === '') {
             toast.success('no update was applied')
             setCustomProfile(!customProfile)
         } else {
@@ -60,17 +59,6 @@ export const MyProfile =({user}:any)=>{
                     navigate('/myprofile')
                 })
             } 
-            if(descInput !== '') {
-                updateDescription({
-                    variables:{
-                        description:descInput!,
-                        username:user.username!
-                    }
-                }).then(()=>{
-                    toast.success('success update description')
-                    setCustomProfile(!customProfile)
-                })
-            }
         }
     }
 
@@ -133,6 +121,25 @@ export const MyProfile =({user}:any)=>{
     //             })
     //         }).length)
     // }
+    const getAllVisitor = useSubscription(GET_TOTAL_VISITOR,{
+        variables:{
+            target:user.username!
+        }
+    })
+
+    const [createChatRoom] = useMutation(CREATE_CHAT_ROOM)
+    const handleMessageOther =()=>{
+        createChatRoom({
+            variables:{
+                sender:getUser.username,
+                receiver:user.username
+            }
+        }).then(()=>navigate('/messages'))
+    }
+
+    const handleSaveProfile =()=>{
+        window.print()
+    }
 
     return  <BoxInnerTemplates>
                     {
@@ -151,7 +158,6 @@ export const MyProfile =({user}:any)=>{
                                     <input onChange={(e:any)=>handleProfileImage(e)} type="file" id="file" aria-label="File browser example"/>
                                 </label>
                                 <textarea onChange={(e:any)=>setUsernameInput(e.target.value)} placeholder={user.username}/>
-                                <textarea onChange={(e:any)=>setDescInput(e.target.value)} placeholder={user.UserDetail.description}/>
                                 <div onClick={()=>handleSave()} className="follow-button-effect">save</div>
                             </div>
                         </div>
@@ -216,13 +222,19 @@ export const MyProfile =({user}:any)=>{
                                         }).length
 
                                 } connections</div>
+                                <div className="hover">{
+                                    getAllVisitor.loading === true ? 
+                                    null :
+                                    getAllVisitor.data.UserVisitor.length
+
+                                } visitors</div>
                             </div>
                             {
                                 getAllConnect.loading === true ? null :
                                 user.username === getUser.username ?
                                 null :
-                                getAllConnect.data.UserConnect.find((userCurr:any) => (userCurr.receiverConnect === user.username && userCurr.senderConnect === getUser.username || userCurr.senderConnect === user.username && userCurr.receiverConnect === user.username)) !== undefined ?
-                                    <div className="people-recommend-card-message-connect-button set-margin" onClick={()=> navigate('/messages')}>message</div> : 
+                                getAllConnect.data.UserConnect.find((userCurr:any) => (userCurr.receiverConnect === user.username && userCurr.senderConnect === getUser.username || userCurr.senderConnect === user.username && userCurr.receiverConnect === getUser.username)) !== undefined ?
+                                    <div className="people-recommend-card-message-connect-button set-margin" onClick={()=> handleMessageOther()}>message</div> : 
                                     <div className="follow-button-effect con set-margin"
                                         onClick={()=>handleConnect()}
                                     >connect</div>
@@ -246,11 +258,15 @@ export const MyProfile =({user}:any)=>{
                                     : null
                                 }
                             </div>
+                            <div className="my-profile-button-bottom-container">
+
                             {
-                                    user.username === getUser.username ?
-                                    <div className="my-profile-logout follow-button-effect" onClick={()=>handleLogout()}>logout</div>
-                                    : null
+                                user.username === getUser.username ?
+                                <div className="my-profile-logout follow-button-effect" onClick={()=>handleLogout()}>logout</div>
+                                : null
                             }
+                                <div className="my-profile-logout follow-button-effect" onClick={()=>handleSaveProfile()}>save as pdf</div>
+                            </div>
                         </div>
                     </div>
             </BoxInnerTemplates>

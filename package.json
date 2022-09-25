@@ -20,6 +20,7 @@
     "gapi-script": "^1.2.0",
     "graphql": "^16.6.0",
     "graphql-ws": "^5.10.1",
+    "pspdfkit": "^2022.4.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-google-button": "^0.7.2",
@@ -33,6 +34,7 @@
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "@types/node": "^18.7.20",
     "@types/react": "^18.0.17",
     "@types/react-copy-to-clipboard": "^5.0.4",
     "@types/react-dom": "^18.0.6",

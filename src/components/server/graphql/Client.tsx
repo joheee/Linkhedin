@@ -31,9 +31,9 @@ export const GetClient =()=>{
     },
     wsLink,
     httpLink,
-  );
+  )
   return new ApolloClient({
     link: splitLink,
     cache: new InMemoryCache()
-  });
+  })
 }

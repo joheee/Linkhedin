@@ -25,7 +25,7 @@ export const NotificationInfoConnectCard =(prop:any)=>{
     })
     const [acceptConnect] = useMutation(CONNECT_ACCEPT)
     const [handleFollow] = useMutation(FOLLOW_MECHANISM)
-    const [createChatRoom] = useMutation(CREATE_CHAT_ROOM)
+    
     const handleAccept =()=>{
         acceptConnect({
             variables:{
@@ -45,14 +45,8 @@ export const NotificationInfoConnectCard =(prop:any)=>{
                         sender:prop.senderConnect
                     }
                 }).then(()=>{
-                    createChatRoom({
-                        variables:{
-                            sender:prop.senderConnect,
-                            receiver:prop.receiverConnect
-                        }
-                    }).then(()=>{
-                        toast.success('accept ' + prop.senderConnect)
-                    })
+                    
+                    toast.success('accept ' + prop.senderConnect)
                 })
             })
         })

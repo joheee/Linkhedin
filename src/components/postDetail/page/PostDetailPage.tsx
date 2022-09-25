@@ -14,7 +14,6 @@ export const PostDetailPage =()=>{
         }
     })
 
-    if(!getCurrentPost.loading) console.log(getCurrentPost.data.Post[0])
 
     return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
                 <NavbarHomeMobile/>

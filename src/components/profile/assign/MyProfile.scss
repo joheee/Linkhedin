@@ -193,9 +193,14 @@
                 }
             }
         }
-        .my-profile-logout{
-            margin-top: 1rem;
-            max-width:fit-content;
+        .my-profile-button-bottom-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            .my-profile-logout{
+                margin-top: 1rem;
+                max-width:fit-content;
+            }
         }
     }
 }

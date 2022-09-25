@@ -1,4 +1,4 @@
-import { useMutation, useSubscription } from "@apollo/client"
+ import { useMutation, useSubscription } from "@apollo/client"
 import { useState } from "react"
 import toast from "react-hot-toast"
 import { CREATE_POST_COMMENT } from "../../../server/mutation/MutationList"
@@ -6,7 +6,7 @@ import { GET_LOGIN_USER } from "../../../server/query/QueryList"
 import { InputTemplates } from "../../../utils/InputTemplates"
 import './CommentInputTemplates.scss'
 
-export const CommentInputTemplates =({comment}:any)=>{
+export const CommentInputTemplates =({comment,reply_id}:any)=>{
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
     const getLoginUser = useSubscription(GET_LOGIN_USER,{
@@ -23,7 +23,7 @@ export const CommentInputTemplates =({comment}:any)=>{
             createPostComment({
                 variables:{
                     username:getUser.username!,
-                    reply_id:null,
+                    reply_id:reply_id,
                     post_id:comment.post_id,
                     message:message!
                 }
@@ -32,7 +32,6 @@ export const CommentInputTemplates =({comment}:any)=>{
             })
         }
     }
-
     return  <div className="comment-input-container">
                 <div className="comment-input-image-profile">
                     <img src={

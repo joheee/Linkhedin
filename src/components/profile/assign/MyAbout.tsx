@@ -2,7 +2,7 @@ import { useMutation, useSubscription } from '@apollo/client'
 import { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { RichTextRenderTemplates } from '../../home/templates/postTemplates/postCreate/RichTextRenderTemplates'
-import { UPDATE_USER_BY_PK_NEW_PHOTO_ABOUT } from '../../server/mutation/MutationList'
+import { UPDATE_USER_BY_PK_NEW_DESCRIPTION } from '../../server/mutation/MutationList'
 import { BoxInnerTemplates } from '../../utils/BoxInnerTemplates'
 import './MyAbout.scss'
 
@@ -11,17 +11,17 @@ export const MyAbout =({user}:any)=>{
     getUser === null ? "":getUser
     const [aboutInput,setAboutInput] = useState('')
     const [isInput, setIsInput] = useState(false)
-    const [updateAbout] = useMutation(UPDATE_USER_BY_PK_NEW_PHOTO_ABOUT)
+    const [updateDescription] = useMutation(UPDATE_USER_BY_PK_NEW_DESCRIPTION)
     
     const handleAbout =()=>{
         if(aboutInput === '') {
             toast.success('no update was applied')
             setIsInput(!isInput)
         } else {
-            updateAbout({
+            updateDescription({
                 variables:{
                     username:user.username,
-                    about:aboutInput!
+                    description:aboutInput!
                 }
             }).then(()=>{
                 toast.success('success update about me')
@@ -31,8 +31,8 @@ export const MyAbout =({user}:any)=>{
     }
     
     useEffect(()=>{
-        setAboutInput(user.UserDetail.about)
-    },[user.UserDetail.about])
+        setAboutInput(user.UserDetail.description)
+    },[user.UserDetail.description])
 
     return  <BoxInnerTemplates>
                 <div className="my-about-parent-container">
@@ -52,7 +52,7 @@ export const MyAbout =({user}:any)=>{
                         </div>
                     }
                     <div className="my-about-core">
-                        <RichTextRenderTemplates content={aboutInput === '' ? user.UserDetail.about : aboutInput}/>
+                        <RichTextRenderTemplates content={aboutInput === '' ? user.UserDetail.description : aboutInput}/>
                     </div>
                 </div>
             </BoxInnerTemplates>

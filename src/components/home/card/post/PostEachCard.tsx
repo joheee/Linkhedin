@@ -7,9 +7,7 @@ import { PostCardItemTemplates } from "../../templates/postTemplates/postCard/Po
 export const CommentPopUpContext = createContext<any>({})
 
 export const PostEachCard =({post}:any)=>{
-    console.log(post.post_id)
     const [isComment,setIsComment] = useState(false)
-
     return  <CommentPopUpContext.Provider value={{isComment,setIsComment}}>
                 <Link to={`/post-detail/${post.post_id}`}>
                 <RecommendPersonTemplates {...post.User}/>

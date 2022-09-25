@@ -42,7 +42,7 @@ export const PostCreateOutlineTemplates =({setIsPost}:{setIsPost:(active:boolean
                     <textarea value={text} onChange={(e) => setText(e.target.value)} className='autoresizing' placeholder={'what do you want to talk about'}>
                     </textarea>
                 </div>
-                    <PostPictureVideoTemplates text={text}/>
+                    <PostPictureVideoTemplates text={text} setIsPost={setIsPost}/>
                 </div>
             </div>
 }

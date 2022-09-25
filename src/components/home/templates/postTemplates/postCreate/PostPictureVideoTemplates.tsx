@@ -3,10 +3,10 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 import { storage } from '../../../../server/firebase/FirebaseHelper'
-import { CREATE_POST, UPDATE_POST } from '../../../../server/mutation/MutationList'
+import { CREATE_POST, CREATE_POST_NOTIFICATION, UPDATE_POST } from '../../../../server/mutation/MutationList'
 import './PostPictureVideoTemplates.scss'
 
-export const PostPictureVideoTemplates =({text}:any)=>{
+export const PostPictureVideoTemplates =({text,setIsPost}:any)=>{
     const [pictureInput, setPictureInput] = useState(null)
     const [previewPictureInput, setPreviewPictureInput] = useState('')
     const [videoInput, setVideoInput] = useState(null)
@@ -22,12 +22,12 @@ export const PostPictureVideoTemplates =({text}:any)=>{
     }
     const handleImageInput =(e:any)=>{
         handleResetVideoInput()
-        setPictureInput(e.target.files[0])
+        handleResetImageInput()
         setPreviewPictureInput(URL.createObjectURL(e.target.files[0]))
     }
     const handleVideoInput =(e:any)=>{
         handleResetImageInput()
-        setVideoInput(e.target.files[0])
+        handleResetVideoInput()
         setPreviewVideoInput(URL.createObjectURL(e.target.files[0]))
     }
 
@@ -35,6 +35,7 @@ export const PostPictureVideoTemplates =({text}:any)=>{
     getUser === null ? "":getUser
     const [createPost] = useMutation(CREATE_POST)
     const [updatePost] = useMutation(UPDATE_POST)
+    const [createPostNotification] = useMutation(CREATE_POST_NOTIFICATION)
     const handlePost =()=>{
         if(text === '') {
             toast.error('desc must be filled')
@@ -58,7 +59,15 @@ export const PostPictureVideoTemplates =({text}:any)=>{
                                 video:null
                             }
                         }).then(()=>{
-                            toast.success('success create new post')
+                            createPostNotification({
+                                variables:{
+                                    post_id:e.data.insert_Post_one.post_id!,
+                                    username:getUser.username!
+                                }
+                            }).then(()=>{
+                                toast.success('success create new post')
+                                setIsPost(false)
+                            })
                         })
                         })
                     })
@@ -76,34 +85,51 @@ export const PostPictureVideoTemplates =({text}:any)=>{
                                 photo:null
                             }
                         }).then(()=>{
-                            toast.success('success create new post')
+                            createPostNotification({
+                                variables:{
+                                    post_id:e.data.insert_Post_one.post_id!,
+                                    username:getUser.username!
+                                }
+                            }).then(()=>{
+                                toast.success('success create new post')
+                                setIsPost(false)
+                            })
                         })
                         })
                     })
                     return
+                } else {
+                    createPostNotification({
+                        variables:{
+                            post_id:e.data.insert_Post_one.post_id!,
+                            username:getUser.username!
+                        }
+                    }).then(()=>{
+                        toast.success('success create new post')
+                        setIsPost(false)
+                    })
                 }
-                toast.success('success create new post')
             })
         }
     }
 
     return  <div className="">
-                    {
-                        previewPictureInput==='' && videoPictureInput === '' ?
-                        null:
-                        <div className="post-picture-image-video-container">
-                            {
-                                previewPictureInput!=='' ? 
-                                <img src={previewPictureInput} alt="" />
-                                :
-                                <video src={videoPictureInput} controls></video>
-                            }
-                            <div className="follow-button-effect" onClick={()=>{
-                                handleResetImageInput()
-                                handleResetVideoInput()
-                            }}>cancel</div>
-                        </div>
-                    }
+                {
+                    previewPictureInput==='' && videoPictureInput === '' ?
+                    null:
+                    <div className="post-picture-image-video-container">
+                        {
+                            previewPictureInput!=='' ? 
+                            <img src={previewPictureInput} alt="" />
+                            :
+                            <video src={videoPictureInput} controls></video>
+                        }
+                        <div className="follow-button-effect" onClick={()=>{
+                            handleResetImageInput()
+                            handleResetVideoInput()
+                        }}>cancel</div>
+                    </div>
+                }
                 <div className="post-picture-video-templates-container">
                     <div className="post-picture-video-container">
                     <label className="file">

@@ -513,3 +513,88 @@ mutation UpdateJob($picture:String,$title:String, $company:String,$workplace:Str
   }
 }
 `
+
+export const CREATE_POST_NOTIFICATION = gql
+`
+mutation CreatePostConnect($post_id:uuid!, $username:String!){
+  insert_PostCreateNotification_one(object:{post_id:$post_id, username:$username}){
+    post_create_id
+    post_id
+    username
+  }
+}
+`
+
+export const FOLLOW_USER_NOTIFICATION = gql
+`
+mutation CreateFollowerNotification($follower_id:uuid!, $sender:String!, $target:String!) {
+  insert_UserFollowerNotification_one(object:{follower_id:$follower_id,sendFollow:$sender, targerFollow:$target}){
+    user_follower_notification_id
+    follower_id
+    sendFollow
+    targerFollow
+  }
+}
+`
+
+export const DELETE_FOLLOW_USER_NOTIFICATION = gql
+`
+mutation DeleteFollowerNotification($follower_id:uuid!) {
+  delete_UserFollowerNotification(where:{follower_id:{_eq:$follower_id}}){
+		returning{
+      user_follower_notification_id
+      follower_id
+      sendFollow
+      targerFollow
+    }
+  }
+}
+`
+
+export const CREATE_PROFILE_VISITOR = gql
+`
+mutation CreateVisitor($visitor:String!, $target:String!){
+  insert_UserVisitor_one(object:{visitor:$visitor, target:$target}){
+    user_visitor_id
+    visitor
+    target
+    User {
+      user_id
+      username
+      email
+      password
+      UserDetail {
+        about
+        description
+        photoBanner
+        photoProfile
+        username
+      }
+    }
+  }
+}
+`
+
+export const CREATE_COMMENT_LIKE = gql
+`
+mutation CreateCommentLike($comment_id:uuid!, $username:String!) {
+  insert_PostCommentLike_one(object:{comment_id:$comment_id,likedBy:$username}){
+    post_comment_like_id
+    comment_id
+    likedBy
+  }
+}
+`
+
+export const DELETE_COMMENT_LIKE = gql
+`
+mutation CreateCommentLike($comment_id:uuid!, $username:String!) {
+  delete_PostCommentLike(where:{comment_id:{_eq:$comment_id},likedBy:{_eq:$username}}){
+    returning {
+      post_comment_like_id
+      comment_id
+      likedBy
+    }
+  }
+}
+`

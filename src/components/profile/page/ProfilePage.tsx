@@ -1,5 +1,5 @@
 import { useSubscription } from "@apollo/client"
-import { useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { FooterAttributeTemplates } from "../../footer/templates/FooterAttributeTemplates"
 import { PostFirstMapCard } from "../../home/card/post/PostFirstMapCard"
@@ -23,13 +23,21 @@ import './ProfilePage.scss'
  
 export const ProfilePage =({username}:any)=>{
     const navigate = useNavigate()
+    const getUser = JSON.parse(localStorage.getItem('current_login')!)
+    getUser === null ? "":getUser
+
+    useEffect(()=>{
+        if(getUser === null) {
+            navigate('/')
+        }
+    },[])
+    if(getUser === null) return <div className=""></div>
     if(username === null){
         navigate('/')
     }
+
     const [isActivity, setIsActivity] = useState(false)
-    const getUser = JSON.parse(localStorage.getItem('current_login')!)
-    getUser === null ? "":getUser
-    
+
     if(username === undefined) username = getUser.username    
 
     const getCurrentPost = useSubscription(GET_LOGIN_USER,{
@@ -37,9 +45,14 @@ export const ProfilePage =({username}:any)=>{
             username:username!
         }
     })
-    return  <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
-                <NavbarHomeMobile/>
-                    
+
+    const saveProfileRef = useRef<HTMLDivElement>(null)
+
+    return  <div ref={saveProfileRef}>
+
+                <BackgroundManager className="home-page" colorCode={HandleBackground('--secondaryColor')}>
+
+                    <NavbarHomeMobile/>
                     {
                         getCurrentPost.loading === true ?
                         <div className="loading-animation-container">
@@ -84,5 +97,6 @@ export const ProfilePage =({username}:any)=>{
 
                         </HomeContainerTemplates>
                     }
-            </BackgroundManager>
+                </BackgroundManager>
+            </div>
 }

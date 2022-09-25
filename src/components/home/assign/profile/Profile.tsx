@@ -13,13 +13,14 @@ export const Profile =()=>{
     const navigate = useNavigate()
     const getUser = JSON.parse(localStorage.getItem('current_login')!)
     getUser === null ? "":getUser
+
     const {loading,error,data} = useSubscription(GET_LOGIN_USER,{
         variables: {
             username:getUser.username
         }
     })
     const getAllConnect = useSubscription(GET_ALL_CONNECT)
-
+    
     return  <BoxTemplates>
                 <BoxInnerTemplates>
                     {
